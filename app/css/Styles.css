@@ -1,0 +1,169 @@
+/* Global styles */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  
+  /* Mobile first approach */
+  body {
+    font-family: Arial, sans-serif;
+  }
+  
+  h1, h2, h3 {
+    font-family: 'Arial', sans-serif;
+  }
+  
+  button {
+    cursor: pointer;
+  }
+  
+  /* Flexbox for mobile */
+  .flex {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .flex-col {
+    flex-direction: column;
+  }
+  
+  .flex-row {
+    flex-direction: row;
+  }
+  
+  .justify-between {
+    justify-content: space-between;
+  }
+  
+  .items-center {
+    align-items: center;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  .font-semibold {
+    font-weight: 600;
+  }
+  
+  /* Mobile-first responsive styles */
+  @media (max-width: 768px) {
+    /* Make columns stack on smaller screens */
+    .sm\:w-3 {
+      width: 100% !important;
+    }
+    .sm\:w-1 {
+      width: 100% !important;
+    }
+    .sm\:w-2 {
+      width: 100% !important;
+    }
+  
+    /* Modify images for mobile */
+    .h-24 {
+      height: auto; /* Let the height adjust for better responsiveness */
+    }
+  
+    .w-auto {
+      width: 100%;
+    }
+  
+    /* Adjust padding and margins for mobile */
+    .px-10 {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  
+    .py-10 {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+  
+    /* Remove unnecessary space between text and buttons on mobile */
+    .mt-10 {
+      margin-top: 1rem;
+    }
+  
+    .mt-8 {
+      margin-top: 1rem;
+    }
+  
+    .mb-5 {
+      margin-bottom: 1rem;
+    }
+  
+    .mb-10 {
+      margin-bottom: 2rem;
+    }
+  
+    .text-xs {
+      font-size: 12px;
+    }
+  
+    .text-sm {
+      font-size: 14px;
+    }
+  
+    .text-lg {
+      font-size: 18px;
+    }
+  
+    .text-2xl {
+      font-size: 24px;
+    }
+  
+    /* Stack buttons for mobile */
+    .w-full {
+      width: 100%;
+    }
+  
+    .sm\:w-auto {
+      width: auto !important;
+    }
+  
+    /* Change the layout of the checkout section */
+    #summary {
+      width: 100%;
+      padding: 10px;
+    }
+  
+    .text-gray-600 {
+      color: #4b5563;
+    }
+  
+    /* Adjust the promo code input */
+    #promo {
+      width: 100%;
+      margin-bottom: 1rem;
+    }
+  
+    /* Remove some unnecessary space */
+    .py-10 {
+      padding: 0.5rem 0;
+    }
+  
+    /* Adjust font size and layout for promo button */
+    .w-full.sm\\:w-auto {
+      width: 100% !important;
+    }
+  
+    /* Ensure buttons look good on small screens */
+    button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 1rem;
+    }
+  
+    /* Ensure the quantity controls are better centered on mobile */
+    .w-8 {
+      width: 30px;
+    }
+  
+    .mx-2 {
+      margin-left: 0.5rem;
+      margin-right: 0.5rem;
+    }
+  }
+  
