@@ -2,7 +2,7 @@ import { database } from "@/db/firebase";
 import { doc, getDoc, deleteDoc } from "firebase/firestore";
 import { NextResponse } from "next/server";
 
-export async function GET(request: Request, { params }: { params: { id: string } }) {
+export async function GET(_req: Request, { params }: { params: { id: string } }) {
   try {
     const productDoc = doc(database, "produit", params.id);
     const productSnap = await getDoc(productDoc);
@@ -39,7 +39,7 @@ export async function GET(request: Request, { params }: { params: { id: string }
   }
 }
 
-export async function DELETE(request: Request, { params }: { params: { id: string } }) {
+export async function DELETE(_request: Request, { params }: { params: { id: string } }) {
   try {
     const productDoc = doc(database, "produit", params.id);
     await deleteDoc(productDoc);

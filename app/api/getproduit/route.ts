@@ -2,7 +2,7 @@ import { database } from "@/db/firebase";
 import { collection, getDocs, query } from "firebase/firestore";
 import { NextResponse } from "next/server";
 
-export const GET = async () => {
+export const GET = async (_req: Request) => {
   try {
     const produitsQuery = query(collection(database, "produit"));
     const snap = await getDocs(produitsQuery);

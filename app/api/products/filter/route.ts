@@ -4,27 +4,32 @@ import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
   try {
-    // Récupérer les paramètres d'URL
+    // Get URL parameters
     const { searchParams } = new URL(request.url);
     const category = searchParams.get('category');
     const collectionName = searchParams.get('collection');
 
-    // Initialiser la requête de base
+    // Base query
     let produitsQuery = query(collection(database, "produit"));
-
-    // Application des filtres si les paramètres existent
+    
+    // Add filters if parameters are provided
+    const filters = [];
     if (category) {
-      produitsQuery = query(produitsQuery, where("category", "==", category));
+      filters.push(where("category", "==", category));
     }
     if (collectionName) {
-      produitsQuery = query(produitsQuery, where("collection", "==", collectionName));
+      filters.push(where("collection", "==", collectionName));
     }
 
-    // Exécution de la requête pour récupérer les produits
+    // Apply filters if any
+    if (filters.length > 0) {
+      produitsQuery = query(collection(database, "produit"), ...filters);
+    }
+
     const snap = await getDocs(produitsQuery);
 
-    // Si des produits sont trouvés
     if (!snap.empty) {
+      // Mapping des documents récupérés pour créer un tableau de produits
       const products = snap.docs.map((doc) => {
         const docData = doc.data();
         return {
@@ -44,20 +49,16 @@ export async function GET(request: Request) {
           imageUrl: docData.photo || docData.imageUrl,
           tailles: docData.tailles || [],
           couleurs: docData.couleurs || [],
-          createdAt: docData.createdAt ? docData.createdAt.toDate().toISOString() : new Date().toISOString(),
+          createdAt: docData.createdAt || new Date().toISOString()
         };
       });
 
       return NextResponse.json({ products });
     } else {
-      // Aucun produit trouvé
       return NextResponse.json({ products: [] });
     }
   } catch (error) {
     console.error("Erreur lors de la récupération des produits :", error);
-    return NextResponse.json(
-      { error: "Erreur lors de la récupération des produits" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Erreur lors de la récupération des produits" }, { status: 500 });
   }
 };
