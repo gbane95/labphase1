@@ -1,7 +1,7 @@
 "use client"
 import React, { useState, useRef, useEffect } from 'react'
-import { Card, Text, Button, Group, Container, Image as MantineImage } from '@mantine/core'
-import { IconPhoto, IconUpload, IconBrandTelegram, IconCheck, IconX } from '@tabler/icons-react'
+import { Card, Text, Button, Container, Image as MantineImage } from '@mantine/core'
+import { IconBrandTelegram, IconCheck, IconX } from '@tabler/icons-react'
 import { useRouter } from 'next/navigation'
 import "../NavbarSimpleColored.module.css";
 import { FileUploaderRegular } from "@uploadcare/react-uploader";
@@ -11,19 +11,17 @@ import { OutputCollectionState, OutputCollectionStatus } from '@uploadcare/react
 
 
 function AddProductForm() {
-    const router = useRouter()
     const [tailles, setTailles] = useState<string[]>([])
     const [couleurs, setCouleurs] = useState<string[]>([])
-    const openRef = useRef<() => void>(null)
     const [codeProduit, setCodeProduit] = useState("")
     const [nomProduit, setNomProduit] = useState("")
     const [descriptionProduit, setDescriptionProduit] = useState("")
     const [prix, setPrix] = useState("")
     const [typeVente, setTypeVente] = useState("")
-    const [devise, setDevise] = useState("FCFA")
+    const [devise, ] = useState("FCFA")
     const [qte, setQte] = useState("")
     const [date, setDate] = useState("")
-    const [lieu, setLieu] = useState("")
+    const [lieu] = useState("")
     const [category, setCategory] = useState("")
     const [collection, setCollection] = useState("")
     const [imageUrl, setImageUrl] = useState("");
@@ -43,14 +41,6 @@ function AddProductForm() {
     }
 
 
-    const add = () => {
-        if (user) {
-            console.log("user connecté")
-        } else {
-            console.log("Veillez vous connecter d'abord")
-            return
-        }
-    }
 
     useEffect(() => {
 

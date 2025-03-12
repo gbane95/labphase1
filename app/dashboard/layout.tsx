@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Suspense, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
 

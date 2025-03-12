@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { User, Mail, MapPin, Phone, Edit } from 'lucide-react';
+import { User, Mail, MapPin, Edit } from 'lucide-react';
 
 interface UserInfo {
   firstName?: string;
@@ -53,7 +53,7 @@ export default function CompteUtilisateur() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-bold mb-4">Vous n'êtes pas connecté</h1>
+          <h1 className="text-2xl font-bold mb-4">Vous n&apos;êtes pas connecté</h1>
           <button 
             onClick={() => router.push('/connexion')}
             className="bg-black text-white px-6 py-2 rounded-md hover:bg-gray-800"

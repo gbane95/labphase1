@@ -53,23 +53,11 @@ const products: Product[] = [
 ];
 
 const FeaturedProducts = () => {
-  const { addToCart } = useCart();
+  useCart();
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
-  const handleProductSelect = (product: Product) => {
-    setSelectedProduct(product);
-  };
 
   const handleAddToCart = (product: Product) => {
-    const formattedProduct = {
-      id: product.id,
-      name: product.nomProduit,
-      price: `${product.prix} ${product.devise}`,
-      image: product.imageUrl,
-      quantity: 1,
-      sizes: product.tailles,
-      description: product.descriptionProduit
-    };
     setSelectedProduct(product);
   };
 

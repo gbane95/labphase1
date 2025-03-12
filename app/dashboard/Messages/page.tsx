@@ -85,6 +85,14 @@ export default function Messages() {
     }
   };
 
+  // Fonction pour voir le contenu du message
+  const handleViewMessage = (id: number) => {
+    const message = messages.find((msg) => msg.id === id);
+    if (message) {
+      alert(`Message de ${message.sender} :\n\n${message.body}`);
+    }
+  };
+
   return (
     <div className="grid grid-cols-1 max-w-7xl mx-auto px-6 py-4">
       {/* Section des Messages */}
@@ -122,6 +130,14 @@ export default function Messages() {
                     >
                       <FaCheckCircle className="inline mr-1" />
                       Marquer comme lu
+                    </button>
+                    {/* Bouton pour voir le message */}
+                    <button
+                      onClick={() => handleViewMessage(message.id)}
+                      className="text-blue-600 hover:text-blue-900 transition-colors hover:scale-105"
+                    >
+                      <FaEye className="inline mr-1" />
+                      Voir
                     </button>
                     {/* Bouton pour supprimer le message */}
                     <button

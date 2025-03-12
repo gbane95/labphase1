@@ -29,7 +29,7 @@ interface Product {
 
 export default function ProductDetail({ params }: { params: { id: string } }) {
   const router = useRouter();
-  const { addToCart, cart, updateQuantity } = useCart();
+  const { addToCart } = useCart();
   const { toggleFavorite, isFavorite } = useFavorites();
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);

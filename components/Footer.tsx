@@ -55,7 +55,7 @@ const Footer = () => {
                   type="submit"
                   className="bg-white text-gray-900 px-4 py-2 ml-2 hover:bg-gray-100"
                 >
-                  S'inscrire
+                  S&apos;inscrire
                 </button>
               </form>
             </div>

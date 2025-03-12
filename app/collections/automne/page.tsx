@@ -43,7 +43,7 @@ const AutomnePage = () => {
         {/* Collection Description */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">L'Élégance Automnale</h2>
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">L&apos;Élégance Automnale</h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
               Notre collection automne propose des pièces confortables aux couleurs chaudes et aux matières douces.
               Découvrez des tenues élégantes parfaitement adaptées aux températures changeantes.

@@ -29,7 +29,7 @@ const ConfidentialitePage = () => {
             <section>
               <h2 className="text-2xl font-bold text-gray-900 mb-4">Données collectées</h2>
               <div className="prose prose-lg text-gray-600">
-                <p>Nous pouvons collecter les types d'informations suivants :</p>
+                <p>Nous pouvons collecter les types d&apos;informations suivants :</p>
                 <ul className="list-disc pl-6 mt-2 space-y-2">
                   <li>
                     <span className="font-medium">Informations personnelles</span> : nom, prénom, adresse email, 
@@ -37,7 +37,7 @@ const ConfidentialitePage = () => {
                   </li>
                   <li>
                     <span className="font-medium">Informations de compte</span> : identifiants de connexion, 
-                    historique d'achats, préférences.
+                    historique d&apos;achats, préférences.
                   </li>
                   <li>
                     <span className="font-medium">Données de navigation</span> : adresse IP, type de navigateur, 
@@ -71,7 +71,7 @@ const ConfidentialitePage = () => {
                 <ul className="list-disc pl-6 mt-2 space-y-2">
                   <li>Nos prestataires de services (paiement, livraison, hébergement)</li>
                   <li>Nos partenaires commerciaux (avec votre consentement)</li>
-                  <li>Les autorités légales si la loi l'exige</li>
+                  <li>Les autorités légales si la loi l&apos;exige</li>
                 </ul>
               </div>
             </section>
@@ -92,7 +92,7 @@ const ConfidentialitePage = () => {
               <div className="prose prose-lg text-gray-600">
                 <p>
                   Nous mettons en œuvre des mesures de sécurité techniques et organisationnelles appropriées pour protéger 
-                  vos données personnelles contre la perte, l'accès non autorisé, la divulgation ou la destruction.
+                  vos données personnelles contre la perte, l&apos;accès non autorisé, la divulgation ou la destruction.
                 </p>
               </div>
             </section>
@@ -102,16 +102,16 @@ const ConfidentialitePage = () => {
               <div className="prose prose-lg text-gray-600">
                 <p>Conformément au RGPD, vous disposez des droits suivants :</p>
                 <ul className="list-disc pl-6 mt-2 space-y-2">
-                  <li>Droit d'accès à vos données personnelles</li>
+                  <li>Droit d&apos;accès à vos données personnelles</li>
                   <li>Droit de rectification des données inexactes</li>
-                  <li>Droit à l'effacement ("droit à l'oubli")</li>
+                  <li>Droit à l&apos;effacement (&quot;droit à l&apos;oubli&quot;)</li>
                   <li>Droit à la limitation du traitement</li>
                   <li>Droit à la portabilité des données</li>
-                  <li>Droit d'opposition au traitement</li>
+                  <li>Droit d&apos;opposition au traitement</li>
                   <li>Droit de retirer votre consentement à tout moment</li>
                 </ul>
                 <p className="mt-4">
-                  Pour exercer ces droits, contactez-nous à l'adresse : privacy@luxe.com
+                  Pour exercer ces droits, contactez-nous à l&apos;adresse : privacy@luxe.com
                 </p>
               </div>
             </section>

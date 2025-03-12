@@ -1,6 +1,6 @@
 import { auth, database } from "@/db/firebase"
 import { signInWithEmailAndPassword } from "firebase/auth"
-import { doc, getDoc, setDoc } from "firebase/firestore"
+import { doc, getDoc } from "firebase/firestore"
 import { NextResponse } from "next/server"
 
 export const POST = async (req: Request) => {

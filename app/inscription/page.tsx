@@ -7,6 +7,18 @@ import { useRouter } from "next/navigation";
 type Gender = 'homme' | 'femme' | 'autre';
 type AccountType = 'client' | 'vendeur';
 
+// Définir un type pour les erreurs
+interface Errors {
+    firstName?: string;
+    lastName?: string;
+    email?: string;
+    country?: string;
+    city?: string;
+    address?: string;
+    accountType?: string;
+    password?: string;
+}
+
 export default function Home() {
     const [step, setStep] = useState(1);
     const redirecte = useRouter();
@@ -24,7 +36,7 @@ export default function Home() {
     const [message, setMessage] = useState("");
 
     // Variable d'état pour les erreurs
-    const [errors, setErrors] = useState({
+    const [errors, setErrors] = useState<Errors>({
         firstName: '',
         lastName: '',
         email: '',
@@ -35,9 +47,7 @@ export default function Home() {
         password: '',
     });
 
-
     const submitForm = async () => {
-
         setMessage(""); // Réinitialisation du message
 
         const req = await fetch("/serveur/sign-up", {
@@ -52,27 +62,25 @@ export default function Home() {
             console.log(res.data);
             setMessage("Utilisateur crée avec succès !");
             localStorage.setItem("user", JSON.stringify(res.data));
-            if (res.data. accountType === "client") {
-                 setTimeout(()=>{
-                redirecte.push("/");
-            },200)
-            }else{
-                setTimeout(()=>{
+            if (res.data.accountType === "client") {
+                setTimeout(() => {
+                    redirecte.push("/");
+                }, 200);
+            } else {
+                setTimeout(() => {
                     redirecte.push("/dashboard");
-                },200)
+                }, 200);
             }
-           
-           
             return;
         } else {
             setMessage(res);
         }
-    }
+    };
 
     const totalSteps = 4;
 
     const validateStep = () => {
-        const newErrors: any = {};
+        const newErrors: Errors = {}; // Remplacez `any` par `Errors`
 
         switch (step) {
             case 1:
@@ -106,7 +114,7 @@ export default function Home() {
             if (step < totalSteps) {
                 setStep(step + 1);
             } else {
-                submitForm()
+                submitForm();
             }
         }
     };
@@ -276,6 +284,7 @@ export default function Home() {
             </div>
         </div>
     );
+    
     const renderStep4 = () => (
         <div className="space-y-6">
             <div className="space-y-2">
@@ -322,7 +331,6 @@ export default function Home() {
                     {step === 4 && renderStep4()}
                 </div>
 
-
                 <div className="flex justify-between">
                     <button
                         onClick={handleBack}
@@ -351,8 +359,6 @@ export default function Home() {
                 >
                     {message}
                 </p>
-
-
             </div>
         </main>
     );

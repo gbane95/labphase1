@@ -1,6 +1,6 @@
 "use client";
 
-import { Grid, Card, Title, Text, Group, ThemeIcon } from "@mantine/core";
+import { Card, Title, Text, Group, ThemeIcon } from "@mantine/core";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, LineChart, Line, PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import { useEffect, useState } from "react";
 import { IconArrowUpRight, IconArrowDownRight } from '@tabler/icons-react';
@@ -80,7 +80,7 @@ export default function DashboardAnalytics() {
         <Card shadow="sm" padding="lg" radius="md" withBorder>
           <Group justify="apart">
             <div>
-              <Text size="xs" color="dimmed">Ventes Aujourd'hui</Text>
+              <Text size="xs" color="dimmed">Ventes Aujourd&apos;hui</Text>
               <Text fw={700} size="xl">{formatCurrency(financialData.today)}</Text>
             </div>
             <ThemeIcon
@@ -152,12 +152,13 @@ export default function DashboardAnalytics() {
           </Group>
         </Card>
       </div>
+
       {/* Existing charts section */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
         {/* 🔹 CHIFFRE D'AFFAIRES */}
         <Card shadow="md" padding="md" className="bg-white rounded-lg p-3 sm:p-5">
           <Title order={4} className="text-lg sm:text-xl font-semibold text-gray-700 mb-2 sm:mb-4">
-            Chiffre d'Affaires Mensuel
+            Chiffre d&apos;Affaires Mensuel
           </Title>
           <ResponsiveContainer width="100%" height={250} minHeight={200}>
             <BarChart data={salesData}>

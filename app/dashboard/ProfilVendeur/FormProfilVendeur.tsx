@@ -1,8 +1,7 @@
 "use client";
-import React from 'react';
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { Button, Group, Card } from '@mantine/core';
-import { Dropzone, MIME_TYPES } from '@mantine/dropzone';
+import { Dropzone } from '@mantine/dropzone'; // Removed MIME_TYPES import since it's unused
 import { IconBrandTelegram, IconPhoto, IconUpload } from '@tabler/icons-react';
 
 // Liste des pays
@@ -62,7 +61,7 @@ function FormProfilVendeur() {
                                                 <option value="+33">+33 (France)</option>
                                                 <option value="+1">+1 (USA)</option>
                                                 <option value="+44">+44 (Royaume-Uni)</option>
-                                                <option value="+225">+225 (Côte d'Ivoire)</option>
+                                                <option value="+225">+225 (Côte d&apos;Ivoire)</option> {/* Correctly escaped quote */}
                                                 <option value="+237">+237 (Cameroun)</option>
                                                 <option value="+221">+221 (Sénégal)</option>
                                                 <option value="+212">+212 (Maroc)</option>

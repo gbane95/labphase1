@@ -1,6 +1,6 @@
 "use client"
 import React, { useEffect, useState } from 'react'
-import { Card, Table, Badge, Button, Group, Text, ActionIcon, Menu, Loader, Grid, SimpleGrid, Modal } from '@mantine/core'
+import { Card, Table, Badge, Button, Group, Text, ActionIcon, Menu, Loader, SimpleGrid, Modal } from '@mantine/core'
 import { IconDotsVertical, IconEdit, IconTrash, IconEye } from '@tabler/icons-react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
@@ -208,7 +208,7 @@ export default function ProductList() {
             <th>Prix</th>
             <th>Quantité</th>
             <th>Type de vente</th>
-            <th>Date d'ajout</th>
+            <th>Date d&apos;ajout</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -324,7 +324,7 @@ export default function ProductList() {
 
         {products.length === 0 ? (
           <Text className="py-8 text-center text-gray-500">
-            Aucun produit n'a été ajouté pour le moment.
+            Aucun produit n&apos;a été ajouté pour le moment.
           </Text>
         ) : viewMode === 'grid' ? (
           renderGridView()
@@ -343,8 +343,7 @@ export default function ProductList() {
         centered
       >
         <Text size="sm" mb="lg">
-          Êtes-vous sûr de vouloir supprimer le produit "{selectedProduct?.nomProduit}" ?
-          Cette action est irréversible.
+          Êtes-vous sûr de vouloir supprimer le produit &quot;{selectedProduct?.nomProduit}&quot; ? Cette action est irréversible.
         </Text>
         <Group justify="flex-end">
           <Button

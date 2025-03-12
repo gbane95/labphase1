@@ -1,35 +1,30 @@
 import { database } from "@/db/firebase";
-import { collection, getDocs, query, where, WhereFilterOp } from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
   try {
-    // Get URL parameters
+    // Récupérer les paramètres d'URL
     const { searchParams } = new URL(request.url);
     const category = searchParams.get('category');
     const collectionName = searchParams.get('collection');
 
-    // Base query
+    // Initialiser la requête de base
     let produitsQuery = query(collection(database, "produit"));
-    
-    // Add filters if parameters are provided
-    const filters = [];
+
+    // Application des filtres si les paramètres existent
     if (category) {
-      filters.push(where("category", "==", category));
+      produitsQuery = query(produitsQuery, where("category", "==", category));
     }
     if (collectionName) {
-      filters.push(where("collection", "==", collectionName));
+      produitsQuery = query(produitsQuery, where("collection", "==", collectionName));
     }
 
-    // Apply filters if any
-    if (filters.length > 0) {
-      produitsQuery = query(collection(database, "produit"), ...filters);
-    }
-
+    // Exécution de la requête pour récupérer les produits
     const snap = await getDocs(produitsQuery);
 
+    // Si des produits sont trouvés
     if (!snap.empty) {
-      // Mapping des documents récupérés pour créer un tableau de produits
       const products = snap.docs.map((doc) => {
         const docData = doc.data();
         return {
@@ -49,16 +44,20 @@ export async function GET(request: Request) {
           imageUrl: docData.photo || docData.imageUrl,
           tailles: docData.tailles || [],
           couleurs: docData.couleurs || [],
-          createdAt: docData.createdAt || new Date().toISOString()
+          createdAt: docData.createdAt ? docData.createdAt.toDate().toISOString() : new Date().toISOString(),
         };
       });
 
       return NextResponse.json({ products });
     } else {
+      // Aucun produit trouvé
       return NextResponse.json({ products: [] });
     }
   } catch (error) {
     console.error("Erreur lors de la récupération des produits :", error);
-    return NextResponse.json({ error: "Erreur lors de la récupération des produits" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Erreur lors de la récupération des produits" },
+      { status: 500 }
+    );
   }
 };

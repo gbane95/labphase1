@@ -5,6 +5,13 @@ import { NextResponse } from "next/server";
 export async function GET() {
   try {
     console.log("Récupération des produits - Début");
+    
+    // Vérification de l'instance Firebase (si nécessaire)
+    if (!database) {
+      console.error("Firebase n'est pas correctement configuré.");
+      return NextResponse.json({ error: "Problème de configuration de Firebase." }, { status: 500 });
+    }
+
     console.log("Firebase database instance:", !!database);
     
     // Utiliser orderBy pour trier par date de création (du plus récent au plus ancien)
@@ -17,6 +24,8 @@ export async function GET() {
       // Mapping des documents récupérés pour créer un tableau de produits
       const products = snap.docs.map((doc) => {
         const docData = doc.data();
+        
+        // Vérification et formatage des données avant de les retourner
         const product = {
           id: doc.id,
           nomProduit: docData.nomProduit || "Sans nom",
@@ -34,9 +43,15 @@ export async function GET() {
           imageUrl: docData.photo || docData.imageUrl || "",
           tailles: docData.tailles || [],
           couleurs: docData.couleurs || [],
-          createdAt: docData.createdAt || new Date().toISOString()
+          // Si 'createdAt' est une instance Timestamp, on la convertit en Date ISO
+          createdAt: docData.createdAt ? docData.createdAt.toDate().toISOString() : new Date().toISOString()
         };
-        console.log(`Produit récupéré - ID: ${doc.id}, Nom: ${product.nomProduit}, Image: ${product.imageUrl}`);
+
+        // Logs utiles pendant le développement
+        if (process.env.NODE_ENV === "development") {
+          console.log(`Produit récupéré - ID: ${doc.id}, Nom: ${product.nomProduit}, Image: ${product.imageUrl}`);
+        }
+
         return product;
       });
 

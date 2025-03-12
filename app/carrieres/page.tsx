@@ -55,10 +55,11 @@ const CarrieresPage = () => {
           />
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-center text-white px-4">
-              <h1 className="text-4xl md:text-5xl font-bold mb-4">Rejoignez l'équipe LUXE</h1>
+              <h1 className="text-4xl md:text-5xl font-bold mb-4">Rejoignez l&apos;équipe LUXE</h1>
               <p className="text-xl max-w-2xl mx-auto">
                 Découvrez les opportunités de carrière au sein de notre maison de luxe
               </p>
+
             </div>
           </div>
         </div>

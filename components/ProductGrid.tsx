@@ -29,6 +29,7 @@ type Product = {
   collection?: string;
   tailles?: string[];
   couleurs?: string[];
+  qte?: number; // Ajout du 'qte' si nécessaire
 };
 
 // Définition des propriétés du composant ProductGrid
@@ -42,7 +43,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ category, collection, title }
   const [products, setProducts] = useState<Product[]>([]); // État pour stocker les produits
   const [loading, setLoading] = useState(true); // État pour gérer le chargement des produits
   const [error, setError] = useState<string | null>(null); // État pour gérer les erreurs
-  const [selectedProduct, setSelectedProduct] = useState<any>(null); // État pour gérer le produit sélectionné (pour la modal)
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null); // Modifié pour accepter 'Product' ou 'null'
   const { addToCart } = useCart(); // Récupération de la fonction pour ajouter au panier depuis le contexte
 
   useEffect(() => {
@@ -57,7 +58,6 @@ const ProductGrid: React.FC<ProductGridProps> = ({ category, collection, title }
       let productsQuery;
       
       try {
-        // Tentative sans utiliser "orderBy" pour simplifier la requête
         const productsRef = firestoreCollection(database, "produit"); // Référence à la collection Firestore
         console.log('Référence de la collection créée avec succès');
         
@@ -67,23 +67,16 @@ const ProductGrid: React.FC<ProductGridProps> = ({ category, collection, title }
         const filters = [];
         if (category) {
           console.log(`Ajout du filtre catégorie : ${category}`);
-          // Ignorer la casse pour la catégorie (mettre en minuscules pour la comparaison)
           filters.push(where("category", "==", category.charAt(0).toUpperCase() + category.slice(1).toLowerCase()));
         }
         if (collection) {
           console.log(`Ajout du filtre collection : ${collection}`);
-          // Normalize collection name to handle accents and case sensitivity
-          // Convert 'ete' to 'Été', 'printemps' to 'Printemps', etc.
           let normalizedCollection = collection.toLowerCase();
-          
-          // Handle special case for 'ete' -> 'Été'
           if (normalizedCollection === 'ete') {
             normalizedCollection = 'Été';
           } else {
-            // For other collections, capitalize first letter
             normalizedCollection = collection.charAt(0).toUpperCase() + collection.slice(1).toLowerCase();
           }
-          
           console.log(`Collection normalisée : ${normalizedCollection}`);
           filters.push(where("collection", "==", normalizedCollection));
         }
@@ -99,88 +92,77 @@ const ProductGrid: React.FC<ProductGridProps> = ({ category, collection, title }
         setLoading(false);
         return;
       }
+
+      // Mise en place d'un écouteur en temps réel
+      const unsubscribe = onSnapshot(productsQuery, 
+        (snapshot: QuerySnapshot<DocumentData>) => {
+          console.log(`ProductGrid - ${snapshot.size} produits trouvés`);
+          const productsList = snapshot.docs.map((doc: DocumentSnapshot<DocumentData>) => {
+            const docData = doc.data() || {};
+            const product = {
+              id: doc.id,
+              nomProduit: docData.nomProduit || '',
+              prix: docData.prix || 0,
+              devise: docData.devise || '',
+              descriptionProduit: docData.descriptionProduit || '',
+              category: docData.category || '',
+              collection: docData.collection || '',
+              imageUrl: docData.photo || docData.imageUrl || '',
+              tailles: docData.tailles || [],
+              couleurs: docData.couleurs || [],
+              qte: docData.qte || 0,  // Ajout de 'qte'
+              createdAt: docData.createdAt || new Date().toISOString()
+            };
+            return product;
+          });
+          setProducts(productsList); // Mise à jour de l'état avec la liste des produits
+          setLoading(false); // Fin du chargement
+        },
+        (error: FirestoreError) => {
+          console.error('Erreur lors de la récupération des produits :', error);
+          setError('Impossible de charger les produits. Veuillez réessayer plus tard.');
+          setLoading(false);
+        }
+      );
     
-    // Mise en place d'un écouteur en temps réel
-    const unsubscribe = onSnapshot(productsQuery, 
-      (snapshot: QuerySnapshot<DocumentData>) => {
-        console.log(`ProductGrid - ${snapshot.size} produits trouvés`);
-        const productsList = snapshot.docs.map((doc: DocumentSnapshot<DocumentData>) => {
-          const docData = doc.data() || {}; // Récupération des données du document
-          const product = {
-            id: doc.id,
-            nomProduit: docData.nomProduit || '',
-            prix: docData.prix || 0,
-            devise: docData.devise || '',
-            qte: docData.qte || 0,
-            lieu: docData.lieu || '',
-            namestore: docData.namestore || '',
-            descriptionProduit: docData.descriptionProduit || '',
-            codeProduit: docData.codeProduit || '',  
-            typeVente: docData.typeVente || '',
-            date: docData.date || '',
-            category: docData.category || '',
-            collection: docData.collection || '',
-            imageUrl: docData.photo || docData.imageUrl || '',
-            tailles: docData.tailles || [],
-            couleurs: docData.couleurs || [],
-            createdAt: docData.createdAt || new Date().toISOString()
-          };
-          console.log(`Produit chargé - ID: ${doc.id}, Nom: ${product.nomProduit}, Image: ${product.imageUrl}`);
-          return product;
-        });
-        
-        setProducts(productsList); // Mise à jour de l'état avec la liste des produits
-        setLoading(false); // Fin du chargement
-      },
-      (error: FirestoreError) => {
-        console.error('Erreur lors de la récupération des produits :', error);
-        setError('Impossible de charger les produits. Veuillez réessayer plus tard.');
-        setLoading(false);
-      }
-    );
-    
-    // Nettoyage de l'écouteur lors du démontage du composant
-    return () => unsubscribe();
+      return () => unsubscribe(); // Nettoyage lors du démontage du composant
     } catch (err) {
       console.error('Erreur de connexion à Firebase :', err);
       setError('Erreur de connexion à la base de données. Veuillez réessayer plus tard.');
       setLoading(false);
-      return () => {};
     }
   }, [category, collection]); // Dépendances pour recharger les produits quand les filtres changent
 
   const handleProductClick = (product: Product) => {
-    // Formatage du produit pour qu'il corresponde au format attendu par le modal de produit
     const formattedProduct = {
       id: product.id,
-      name: product.nomProduit,
-      price: `${product.prix} ${product.devise}`,
-      image: product.imageUrl,
-      description: product.descriptionProduit,
-      sizes: product.tailles,
-      colors: product.couleurs
+      nomProduit: product.nomProduit,
+      prix: product.prix,
+      devise: product.devise,
+      imageUrl: product.imageUrl,
+      descriptionProduit: product.descriptionProduit,
+      tailles: product.tailles,
+      couleurs: product.couleurs
     };
     
-    setSelectedProduct(formattedProduct); // Affichage du produit sélectionné dans la modal
+    setSelectedProduct(formattedProduct); // Mise à jour de l'état avec le produit sélectionné
   };
 
   const handleAddToCart = (product: Product) => {
-    // Au lieu d'ajouter directement au panier, on affiche d'abord le modal
-    // pour permettre à l'utilisateur de sélectionner une taille
     const formattedProduct = {
       id: product.id,
-      name: product.nomProduit,
-      price: `${product.prix} ${product.devise}`,
-      image: product.imageUrl,
-      description: product.descriptionProduit,
-      sizes: product.tailles,
-      colors: product.couleurs
+      nomProduit: product.nomProduit,
+      prix: product.prix,
+      devise: product.devise,
+      imageUrl: product.imageUrl,
+      descriptionProduit: product.descriptionProduit,
+      tailles: product.tailles,
+      couleurs: product.couleurs
     };
     
-    setSelectedProduct(formattedProduct); // Affichage du produit sélectionné dans la modal
+    setSelectedProduct(formattedProduct); // Mise à jour de l'état avec le produit sélectionné
   };
 
-  // Gestion de l'affichage en fonction de l'état du chargement
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64">
@@ -189,7 +171,6 @@ const ProductGrid: React.FC<ProductGridProps> = ({ category, collection, title }
     );
   }
 
-  // Affichage d'un message d'erreur si une erreur s'est produite
   if (error) {
     return (
       <div className="text-center py-8">
@@ -198,7 +179,6 @@ const ProductGrid: React.FC<ProductGridProps> = ({ category, collection, title }
     );
   }
 
-  // Affichage si aucun produit n'a été trouvé
   if (products.length === 0) {
     return (
       <div className="text-center py-8">
@@ -246,7 +226,15 @@ const ProductGrid: React.FC<ProductGridProps> = ({ category, collection, title }
 
       {selectedProduct && (
         <ProductModal
-          product={selectedProduct} // Passer le produit sélectionné à la modal
+          product={{
+            id: selectedProduct.id,
+            name: selectedProduct.nomProduit,  // Correspondance des propriétés
+            price: `${selectedProduct.prix} ${selectedProduct.devise}`, // Formattage du prix
+            image: selectedProduct.imageUrl,
+            description: selectedProduct.descriptionProduit,
+            sizes: selectedProduct.tailles,
+            colors: selectedProduct.couleurs
+          }}
           onClose={() => setSelectedProduct(null)} // Fermer la modal lorsqu'on clique sur le bouton de fermeture
         />
       )}
@@ -254,4 +242,4 @@ const ProductGrid: React.FC<ProductGridProps> = ({ category, collection, title }
   );
 };
 
-export default ProductGrid; // Exportation du composant ProductGrid
+export default ProductGrid;

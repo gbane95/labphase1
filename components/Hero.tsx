@@ -59,7 +59,7 @@ const Hero = () => {
         className="relative w-full h-full flex transition-transform duration-500 ease-out"
         style={{ transform: `translateX(-${currentSlide * 100}%)` }}
       >
-        {collections.map((collection, index) => (
+        {collections.map((collection, _index) => (
           <div
             key={collection.name}
             className="w-full h-full flex-shrink-0"

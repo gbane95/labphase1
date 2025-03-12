@@ -16,12 +16,20 @@ type Product = {
 };
 
 type ProductModalProps = {
-  product: Product;
+  product: {
+    id: string | number;
+    name: string;
+    price: string;
+    image: string;
+    description?: string;
+    sizes?: string[];
+    colors?: string[];
+  };
   onClose: () => void;
 };
 
 const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) => {
-  const { addToCart, cart, updateQuantity } = useCart();
+  const { addToCart, cart } = useCart();
   const { toggleFavorite, isFavorite } = useFavorites();
   
   const cartItem = cart.find(item => item.id === product.id);

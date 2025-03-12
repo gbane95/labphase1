@@ -14,7 +14,7 @@ const NotreHistoirePage = () => {
           <div className="text-center mb-16">
             <h1 className="text-4xl font-bold text-gray-900 mb-4">Notre Histoire</h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Depuis notre création, nous nous efforçons de redéfinir l'excellence dans la mode de luxe.
+              Depuis notre création, nous nous efforçons de redéfinir l&#39;excellence dans la mode de luxe.
             </p>
           </div>
 
@@ -33,8 +33,8 @@ const NotreHistoirePage = () => {
               <div className="w-full md:w-1/2 space-y-4">
                 <h2 className="text-3xl font-bold text-gray-900">2010 - La Fondation</h2>
                 <p className="text-gray-600">
-                  LUXE a été fondée avec une vision claire : créer une marque de mode qui allie l'élégance intemporelle
-                  à l'innovation contemporaine. Notre voyage a commencé dans un petit atelier à Paris.
+                  LUXE a été fondée avec une vision claire : créer une marque de mode qui allie l&#39;élégance intemporelle
+                  à l&#39;innovation contemporaine. Notre voyage a commencé dans un petit atelier à Paris.
                 </p>
               </div>
             </div>
@@ -50,9 +50,9 @@ const NotreHistoirePage = () => {
                 />
               </div>
               <div className="w-full md:w-1/2 space-y-4">
-                <h2 className="text-3xl font-bold text-gray-900">2015 - L'Expansion</h2>
+                <h2 className="text-3xl font-bold text-gray-900">2015 - L&#39;Expansion</h2>
                 <p className="text-gray-600">
-                  Après des années de croissance constante, nous avons étendu notre présence à l'international,
+                  Après des années de croissance constante, nous avons étendu notre présence à l&#39;international,
                   ouvrant des boutiques dans les principales capitales de la mode.
                 </p>
               </div>
@@ -69,9 +69,9 @@ const NotreHistoirePage = () => {
                 />
               </div>
               <div className="w-full md:w-1/2 space-y-4">
-                <h2 className="text-3xl font-bold text-gray-900">2020 - L'Innovation</h2>
+                <h2 className="text-3xl font-bold text-gray-900">2020 - L&#39;Innovation</h2>
                 <p className="text-gray-600">
-                  Aujourd'hui, LUXE est à l'avant-garde de l'innovation durable dans la mode de luxe,
+                  Aujourd&#39;hui, LUXE est à l&#39;avant-garde de l&#39;innovation durable dans la mode de luxe,
                   combinant artisanat traditionnel et technologies modernes.
                 </p>
               </div>
@@ -89,7 +89,7 @@ const NotreHistoirePage = () => {
                   </svg>
                 </div>
                 <h3 className="text-xl font-bold text-gray-900">Excellence</h3>
-                <p className="text-gray-600">Nous nous efforçons d'atteindre l'excellence dans chaque détail.</p>
+                <p className="text-gray-600">Nous nous efforçons d&#39;atteindre l&#39;excellence dans chaque détail.</p>
               </div>
               <div className="text-center space-y-4">
                 <div className="w-16 h-16 bg-gray-900 rounded-full flex items-center justify-center mx-auto">

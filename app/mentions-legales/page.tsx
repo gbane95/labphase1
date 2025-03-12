@@ -16,7 +16,7 @@ const MentionsLegalesPage = () => {
               <h2 className="text-2xl font-bold text-gray-900 mb-4">Informations légales</h2>
               <div className="prose prose-lg text-gray-600">
                 <p>
-                  LUXE est une société par actions simplifiée au capital de 100 000 euros,
+                  LUXE est une société par actions simplifiée au capital de 1 000 000 Fcfa,
                   immatriculée au Registre du Commerce et des Sociétés de Paris sous le numéro 123 456 789.
                 </p>
                 <p className="mt-4">

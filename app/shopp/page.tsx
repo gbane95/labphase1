@@ -10,10 +10,6 @@ import Footer from '@/components/Footer';
 import Image from 'next/image';
 import { useCart } from '@/context/CartContext';
 
-// Interface locale pour les types supplémentaires
-interface ExtendedCartItem {
-  brand?: string;
-}
 
 export default function Shopp() {
   const router = useRouter();

@@ -1,7 +1,7 @@
 "use client"
 
 import GoogleLogin from "@/components/googleLogin"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useRedirect } from "@/context/RedirectContext"
@@ -49,8 +49,12 @@ export default function Login() {
           console.log(res);
           setMessage("Utilisateur non trouvé, veuillez vous inscrire.");
         }
-      } catch (error: any) {
-        console.error("Erreur lors de la connexion");
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          console.error("Erreur lors de la connexion", error.message);
+        } else {
+          console.error("Erreur lors de la connexion");
+        }
         setMessage("Erreur lors de la connexion. Vérifiez vos identifiants.");
       } finally {
         setLoading(false); // Désactiver le chargement
@@ -66,7 +70,7 @@ export default function Login() {
           <h1 className="text-3xl font-bold">Connexion</h1>
           <p className="text-lg">Connectez-vous pour continuer</p>
           {redirectUrl && (
-            <p className="text-sm text-blue-600">Vous serez redirigé vers la page demandée après connexion</p>
+            <p className="text-sm text-blue-600">Vous serez redirig&eacute; vers la page demand&eacute;e apr&egrave;s connexion</p>
           )}
         </div>
 
