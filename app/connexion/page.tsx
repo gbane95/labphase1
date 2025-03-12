@@ -26,7 +26,7 @@ export default function Login() {
       try {
         const req = await fetch("/serveur/login", {
           headers: { "Content-type": "application/json" },
-          method: "Post",
+          method: "POST",
           body: JSON.stringify({ email, password })
         });
 
@@ -59,7 +59,7 @@ export default function Login() {
       } finally {
         setLoading(false); // Désactiver le chargement
       }
-    }, 200); // Simule un délai de 2 secondes avant d'envoyer la requête
+    }, 2000); // Simule un délai de 2 secondes
   };
 
   return (

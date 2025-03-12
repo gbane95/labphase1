@@ -23,9 +23,14 @@ interface OrderItem {
 interface Order {
   id: string;
   date: string;
-  status: 'en cours' | 'expédiée' | 'livrée' | 'annulée';
   total: number;
+  status: 'En traitement' | 'Expédiée' | 'Livrée';
   items: OrderItem[];
+  products?: Array<{
+    name: string;
+    quantity: number;
+    price: number;
+  }>;
 }
 
 export default function CommandesUtilisateur() {
@@ -51,7 +56,7 @@ export default function CommandesUtilisateur() {
             {
               id: 'CMD-001',
               date: '2023-10-15',
-              status: 'livrée',
+              status: 'Livrée',
               total: 85900,
               items: [
                 {
@@ -68,7 +73,7 @@ export default function CommandesUtilisateur() {
             {
               id: 'CMD-002',
               date: '2023-11-20',
-              status: 'en cours',
+              status: 'En traitement',
               total: 131192,
               items: [
                 {
@@ -99,13 +104,14 @@ export default function CommandesUtilisateur() {
 
   const getStatusColor = (status: Order['status']) => {
     switch (status) {
-      case 'en cours': return 'bg-blue-100 text-blue-800';
-      case 'expédiée': return 'bg-yellow-100 text-yellow-800';
-      case 'livrée': return 'bg-green-100 text-green-800';
-      case 'annulée': return 'bg-red-100 text-red-800';
+      case 'En traitement': return 'bg-blue-100 text-blue-800';
+      case 'Expédiée': return 'bg-yellow-100 text-yellow-800';
+      case 'Livrée': return 'bg-green-100 text-green-800';
       default: return 'bg-gray-100 text-gray-800';
     }
   };
+  
+  const getStatusStyle = getStatusColor;
 
   const formatDate = (dateString: string) => {
     const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -172,28 +178,16 @@ export default function CommandesUtilisateur() {
           ) : (
             <div className="space-y-6">
               {orders.map((order) => (
-                <div key={order.id} className="bg-white shadow rounded-lg overflow-hidden">
-                  <div className="px-6 py-4 border-b border-gray-200 bg-gray-50">
-                    <div className="flex flex-wrap items-center justify-between">
-                      <div className="flex items-center space-x-4 mb-2 sm:mb-0">
-                        <span className="text-sm font-medium text-gray-900">Commande #{order.id}</span>
-                        <span className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(order.status)}`}>
-                          {order.status.charAt(0).toUpperCase() + order.status.slice(1)}
-                        </span>
-                      </div>
-                      <div className="flex items-center space-x-4">
-                        <div className="flex items-center text-sm text-gray-500">
-                          <Calendar className="h-4 w-4 mr-1" />
-                          {formatDate(order.date)}
-                        </div>
-                        <div className="flex items-center text-sm font-medium">
-                          <CreditCard className="h-4 w-4 mr-1" />
-                          {order.total.toLocaleString()} FCFA
-                        </div>
-                      </div>
+                <div key={order.id} className="border rounded-lg p-4 mb-4">
+                  <div className="flex justify-between items-center mb-2">
+                    <div>
+                      <h3 className="text-lg font-semibold">Commande #{order.id}</h3>
+                      <p className="text-gray-600">{new Date(order.date).toLocaleDateString()}</p>
                     </div>
+                    <span className={`px-3 py-1 rounded-full text-sm ${getStatusStyle(order.status)}`}>
+                      {order.status}
+                    </span>
                   </div>
-
                   <div className="px-6 py-4">
                     {order.items.map((item) => (
                       <div key={`${order.id}-${item.id}`} className="flex items-center py-4 border-b border-gray-100 last:border-0">
@@ -226,7 +220,7 @@ export default function CommandesUtilisateur() {
                   <div className="px-6 py-4 bg-gray-50 flex justify-between items-center">
                     <div className="flex items-center text-sm text-gray-500">
                       <Clock className="h-4 w-4 mr-1" />
-                      {order.status === 'livrée' ? 'Livrée le' : 'Estimée pour le'} {formatDate(order.date)}
+                      {order.status === 'Livrée' ? 'Livrée le' : 'Estimée pour le'} {formatDate(order.date)}
                     </div>
                     <Link 
                       href={`/commandes/${order.id}`}

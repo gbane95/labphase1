@@ -7,6 +7,8 @@ import "../NavbarSimpleColored.module.css";
 import { FileUploaderRegular } from "@uploadcare/react-uploader";
 import "@uploadcare/react-uploader/core.css";
 import { OutputCollectionState, OutputCollectionStatus } from '@uploadcare/react-uploader';
+import { storage } from '@/db/firebase';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 
 
@@ -181,7 +183,7 @@ function AddProductForm() {
                                     type="number"
                                     id="prix"
                                     className="form-input p-3 w-full border-gray-300 rounded-md shadow-sm"
-                                    placeholder="Entrer le prix du produit"
+                                    placeholder="Ex: Robe en soie imprimée fleurs d&apos;été" // Escape apostrophe
                                     value={prix}
                                     onChange={(e) => setPrix(e.target.value)}
                                     min="0"

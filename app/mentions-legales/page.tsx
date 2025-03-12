@@ -116,3 +116,5 @@ const MentionsLegalesPage = () => {
 };
 
 export default MentionsLegalesPage;
+
+// Les données collectées sont conservées pendant la durée nécessaire à l&apos;exécution des services souscrits

@@ -4,6 +4,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Mail, Phone, MapPin, Clock } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const ContactPage = () => {
   // Form state
@@ -165,9 +166,9 @@ const ContactPage = () => {
                     onChange={handleChange}
                     required
                     rows={5}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                    aria-label="Votre message"
-                  ></textarea>
+                    placeholder="Votre message..."
+                    className="w-full h-32 px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
                 </div>
                 
                 <button
@@ -239,6 +240,19 @@ const ContactPage = () => {
                 <p className="text-gray-600">Si vous souhaitez apporter des modifications à votre commande, veuillez nous contacter dans les 24 heures suivant votre achat. Nous ferons de notre mieux pour répondre à votre demande.</p>
               </div>
             </div>
+          </div>
+          
+          <div className="text-center mt-8">
+            <p className="text-sm text-gray-500 mt-4">
+              En soumettant ce formulaire, vous acceptez notre 
+              <Link href="/confidentialite" className="text-blue-600 hover:underline">
+                politique de confidentialité
+              </Link> 
+              et nos 
+              <Link href="/mentions-legales" className="text-blue-600 hover:underline">
+                conditions générales
+              </Link>.
+            </p>
           </div>
         </div>
       </div>
