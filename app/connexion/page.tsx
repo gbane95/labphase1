@@ -70,7 +70,7 @@ export default function Login() {
           <h1 className="text-3xl font-bold">Connexion</h1>
           <p className="text-lg">Connectez-vous pour continuer</p>
           {redirectUrl && (
-            <p className="text-sm text-blue-600">Vous serez redirig&eacute; vers la page demand&eacute;e apr&egrave;s connexion</p>
+            <p className="text-sm text-blue-600">Vous serez redirigé vers la page demandée après connexion</p>
           )}
         </div>
 

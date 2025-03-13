@@ -1,8 +1,10 @@
 import { database } from "@/db/firebase";
 import { collection, getDocs, query } from "firebase/firestore";
-import { NextResponse } from "next/server";
+import { NextResponse,NextRequest } from "next/server";
 
-export const GET = async (_req: Request) => {
+export const GET = async (_request: NextRequest) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
   try {
     const produitsQuery = query(collection(database, "produit"));
     const snap = await getDocs(produitsQuery);

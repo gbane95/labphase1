@@ -81,7 +81,7 @@ const LivraisonPage = () => {
                 </div>
                 <div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Expédition</h3>
-                  <p className="text-gray-600">Votre colis est confié à notre partenaire de livraison pour l&apos;acheminement.</p>
+                  <p className="text-gray-600">Votre colis est confié à notre partenaire de livraison pour l'acheminement.</p>
                 </div>
               </div>
               <div className="flex items-start">
@@ -99,7 +99,7 @@ const LivraisonPage = () => {
                 </div>
                 <div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Livraison</h3>
-                  <p className="text-gray-600">Votre colis est livré à l&apos;adresse indiquée ou disponible en boutique pour le retrait.</p>
+                  <p className="text-gray-600">Votre colis est livré à l'adresse indiquée ou disponible en boutique pour le retrait.</p>
                 </div>
               </div>
             </div>
@@ -111,12 +111,12 @@ const LivraisonPage = () => {
             <div className="space-y-4">
               <div className="border border-gray-200 rounded-lg p-4">
                 <h3 className="text-lg font-medium text-gray-900 mb-2">Quels sont les délais de livraison ?</h3>
-                <p className="text-gray-600">Les délais varient selon l&apos;option choisie : 3-5 jours pour la livraison standard, 1-2 jours pour l&apos;express, et 5-10 jours pour l&apos;international.</p>
+                <p className="text-gray-600">Les délais varient selon l'option choisie : 3-5 jours pour la livraison standard, 1-2 jours pour l'express, et 5-10 jours pour l'international.</p>
               </div>
               <div className="border border-gray-200 rounded-lg p-4">
                 <h3 className="text-lg font-medium text-gray-900 mb-2">Comment puis-je suivre ma commande ?</h3>
-                <p className="text-gray-600">Vous recevrez un email avec un numéro de suivi dès que votre commande sera expédiée. Vous pourrez suivre votre colis en temps réel via notre page &quot;Suivi de commande&quot;.</p>
-              </div>
+                <p className="text-gray-600">Vous recevrez un email avec un numéro de suivi dès que votre commande sera expédiée. Vous pourrez suivre votre colis en temps réel via notre page "vos commandes".</p>
+                </div>
               <div className="border border-gray-200 rounded-lg p-4">
                 <h3 className="text-lg font-medium text-gray-900 mb-2">Que faire si je ne suis pas là pour réceptionner mon colis ?</h3>
                 <p className="text-gray-600">Notre transporteur fera une seconde tentative de livraison. Si vous êtes à nouveau absent, le colis sera déposé dans un point relais proche de chez vous.</p>

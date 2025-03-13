@@ -7,7 +7,7 @@ import Link from 'next/link';
 import ProductGrid from '@/components/ProductGrid';
 import ProductModal from '@/components/ProductModal';
 
-// Define the Product type to match our product structure
+//Définir le type de produit pour qu'il corresponde à notre structure de produit
 type Product = {
   id: string | number;
   name: string;
@@ -43,7 +43,7 @@ const EtePage = () => {
         {/* Collection Description */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">L&apos;Élégance Estivale</h2>
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">L'Élégance Estivale</h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
               Notre collection été met en valeur des tissus légers et respirants, des couleurs vives et des coupes
               décontractées pour vous accompagner tout au long de la saison estivale.

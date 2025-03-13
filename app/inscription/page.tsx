@@ -65,11 +65,11 @@ export default function Home() {
             if (res.data.accountType === "client") {
                 setTimeout(() => {
                     redirecte.push("/");
-                }, 200);
+                }, 2000);
             } else {
                 setTimeout(() => {
                     redirecte.push("/dashboard");
-                }, 200);
+                }, 2000);
             }
             return;
         } else {

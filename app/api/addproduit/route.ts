@@ -6,7 +6,7 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     
-    // Validate required fields
+    //Valider les champs obligatoires
     if (!body.nomProduit || !body.prix) {
       return NextResponse.json(
         { error: 'Nom du produit et prix requis' },
@@ -24,10 +24,21 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ message: "Produit ajouté avec succès" }, { status: 200 });
     } catch (error) {
         console.error(error);
-        return NextResponse.json({ error: "Une erreur est survenue lors de l'ajout du produit", details: (error as any).message }, { status: 500 });
+        if (error instanceof Error) {
+            return NextResponse.json({ 
+                error: "Une erreur est survenue lors de l'ajout du produit", 
+                details: error.message 
+            }, { status: 500 });
+        }
+        return NextResponse.json({ 
+            error: "Une erreur est survenue lors de l'ajout du produit"
+        }, { status: 500 });
     }
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ error: "Une erreur est survenue lors du traitement de la requête", details: (error as any).message }, { status: 500 });
+    return NextResponse.json({ 
+        error: "Une erreur est survenue lors du traitement de la requête",
+        details: error instanceof Error ? error.message : String(error)
+    }, { status: 500 });
   }
 };

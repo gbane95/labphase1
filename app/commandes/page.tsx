@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { Package, Calendar, CreditCard, Clock, ChevronRight } from 'lucide-react';
+import { Package, Clock, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { signOut } from 'firebase/auth'; // Import Firebase signOut
@@ -118,17 +118,6 @@ export default function CommandesUtilisateur() {
     return new Date(dateString).toLocaleDateString('fr-FR', options);
   };
 
-  const handleLogout = async () => {
-    try {
-      // Déconnexion avec Firebase
-      await signOut(auth);
-
-      // Rediriger vers la page d'accueil après la déconnexion
-      router.push('/');
-    } catch (error) {
-      console.error("Erreur lors de la déconnexion:", error);
-    }
-  };
 
   if (loading) {
     return (

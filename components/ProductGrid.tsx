@@ -13,7 +13,6 @@ import {
   query,
   where,
   onSnapshot,
-  orderBy
 } from 'firebase/firestore'; // Importation des fonctions Firestore nécessaires
 import { database } from '@/db/firebase'; // Importation de la référence à la base de données Firebase
 
@@ -44,7 +43,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ category, collection, title }
   const [loading, setLoading] = useState(true); // État pour gérer le chargement des produits
   const [error, setError] = useState<string | null>(null); // État pour gérer les erreurs
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null); // Modifié pour accepter 'Product' ou 'null'
-  const { addToCart } = useCart(); // Récupération de la fonction pour ajouter au panier depuis le contexte
+  useCart(); // Récupération de la fonction pour ajouter au panier depuis le contexte
 
   useEffect(() => {
     setLoading(true); // On commence par afficher le chargement

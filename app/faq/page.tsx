@@ -218,7 +218,7 @@ const FAQPage = () => {
 
           {/* Contact Section */}
           <div className="mt-16 text-center bg-gray-50 p-8 rounded-lg">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Vous n&apos;avez pas trouvé votre réponse ?</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">Vous n'avez pas trouvé votre réponse ?</h2>
             <p className="text-gray-600 mb-6">Notre équipe de service client est là pour vous aider.</p>
             <a href="/contact" className="bg-gray-900 text-white px-6 py-3 rounded hover:bg-gray-800 transition-colors inline-block">
               Contactez-nous

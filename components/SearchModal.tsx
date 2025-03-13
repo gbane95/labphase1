@@ -2,10 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import { X, Search, ShoppingBag, Minus, Plus } from 'lucide-react';
 import Image from 'next/image';
-// Supprimer l'importation inutilisée de Link
-// import Link from 'next/link'; 
-// Si vous n'utilisez pas le router, supprimez cette ligne
-// import { useRouter } from 'next/navigation'; 
 import { useCart } from '../context/CartContext';
 
 // Définition du type Product

@@ -61,7 +61,7 @@ function FormProfilVendeur() {
                                                 <option value="+33">+33 (France)</option>
                                                 <option value="+1">+1 (USA)</option>
                                                 <option value="+44">+44 (Royaume-Uni)</option>
-                                                <option value="+225">+225 (Côte d&apos;Ivoire)</option> {/* Correctly escaped quote */}
+                                                <option value="+225">+225 (Côte d'Ivoire)</option> {/* Correctly escaped quote */}
                                                 <option value="+237">+237 (Cameroun)</option>
                                                 <option value="+221">+221 (Sénégal)</option>
                                                 <option value="+212">+212 (Maroc)</option>

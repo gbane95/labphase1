@@ -2,13 +2,10 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { Card, Text, Button, Container, Image as MantineImage } from '@mantine/core'
 import { IconBrandTelegram, IconCheck, IconX } from '@tabler/icons-react'
-import { useRouter } from 'next/navigation'
 import "../NavbarSimpleColored.module.css";
 import { FileUploaderRegular } from "@uploadcare/react-uploader";
 import "@uploadcare/react-uploader/core.css";
 import { OutputCollectionState, OutputCollectionStatus } from '@uploadcare/react-uploader';
-import { storage } from '@/db/firebase';
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 
 
@@ -23,15 +20,14 @@ function AddProductForm() {
     const [devise, ] = useState("FCFA")
     const [qte, setQte] = useState("")
     const [date, setDate] = useState("")
-    const [lieu] = useState("")
     const [category, setCategory] = useState("")
     const [collection, setCollection] = useState("")
-    const [imageUrl, setImageUrl] = useState("");
+    const [, setImageUrl] = useState("");
     const [imagePreview, setImagePreview] = useState("");
     const [uploadStatus, setUploadStatus] = useState<'idle' | 'uploading' | 'success' | 'error'>('idle');
     const [load, setLoad] = useState(false)
     const [message, setMessage] = useState("")
-    const [user, setUser] = useState(localStorage.getItem("usersInfos")) || null
+    const [user] = useState(localStorage.getItem("usersInfos")) || null
     
     const [namestore, setNamestore] = useState("")
     const[files,setFiles]= useState("")
@@ -183,7 +179,7 @@ function AddProductForm() {
                                     type="number"
                                     id="prix"
                                     className="form-input p-3 w-full border-gray-300 rounded-md shadow-sm"
-                                    placeholder="Ex: Robe en soie imprimée fleurs d&apos;été" // Escape apostrophe
+                                    placeholder="Entrer le prix du produit"
                                     value={prix}
                                     onChange={(e) => setPrix(e.target.value)}
                                     min="0"

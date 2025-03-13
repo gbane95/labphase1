@@ -33,7 +33,7 @@ export default function DashboardLayout({
         }
       } catch (error) {
         console.error('Erreur lors de la vérification des informations utilisateur:', error);
-        router.push('/connexion');
+        router.push('/dashboard');
       }
     }
   }, [router]);

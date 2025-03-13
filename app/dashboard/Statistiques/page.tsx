@@ -54,9 +54,9 @@ const categoryData = [
 const COLORS = ["#FF5733", "#33FF57", "#3357FF", "#FF33A1"];
 
 export default function DashboardAnalytics() {
-  const [setTotalVentes] = useState(0);
-  const [setTotalClients] = useState(0);
-  const [setTotalCommandes] = useState(0);
+  const [totalVentes, setTotalVentes] = useState(0);
+  const [totalClients, setTotalClients] = useState(0);
+  const [totalCommandes, setTotalCommandes] = useState(0);
 
   useEffect(() => {
     setTotalVentes(salesData.reduce((acc, item) => acc + item.ventes, 0));
