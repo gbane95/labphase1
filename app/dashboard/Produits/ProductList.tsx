@@ -150,7 +150,7 @@ export default function ProductList() {
             {product.category || 'Non catégorisé'}
           </Text>
 
-          <Group justify="apart" mt="md">
+          <Group justify="space-between" mt="md">
             <Text fw={500} size="lg">
               {product.prix.toLocaleString()} {product.devise}
             </Text>
@@ -208,7 +208,7 @@ export default function ProductList() {
             <th>Prix</th>
             <th>Quantité</th>
             <th>Type de vente</th>
-            <th>Date d'ajout</th>
+            <th>Date d&ldquo;ajout</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -324,7 +324,7 @@ export default function ProductList() {
 
         {products.length === 0 ? (
           <Text className="py-8 text-center text-gray-500">
-            Aucun produit n'a été ajouté pour le moment.
+            Aucun produit n&ldquo;a été ajouté pour le moment.
           </Text>
         ) : viewMode === 'grid' ? (
           renderGridView()
@@ -343,10 +343,10 @@ export default function ProductList() {
         centered
       >
         <Text size="sm" mb="lg">
-          Êtes-vous sûr de vouloir supprimer le produit "{selectedProduct?.nomProduit}" ?
-          Cette action est irréversible.
-        </Text>
-        <Group justify="right">
+  Êtes-vous sûr de vouloir supprimer le produit &quot;{selectedProduct?.nomProduit}&quot; ? Cette action est irréversible.
+</Text>
+
+        <Group justify="flex-end">
           <Button
             variant="light"
             onClick={() => {

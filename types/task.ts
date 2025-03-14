@@ -33,3 +33,9 @@ export type Product = {
 
 
 export type TaskFilter = 'all' | 'done' | 'undone';
+
+export type ParamsID = {
+  params: Promise<{
+    id?: string;
+  }>
+}

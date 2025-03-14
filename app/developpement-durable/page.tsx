@@ -21,7 +21,7 @@ const DeveloppementDurablePage = () => {
             <div className="text-center text-white px-4">
               <h1 className="text-4xl md:text-5xl font-bold mb-4">Notre Engagement Durable</h1>
               <p className="text-xl max-w-2xl mx-auto">
-                Découvrez comment LUXE s'engage pour un avenir plus responsable et durable
+                Découvrez comment LUXE s&lsquo;engage pour un avenir plus responsable et durable
               </p>
             </div>
           </div>
@@ -87,7 +87,7 @@ const DeveloppementDurablePage = () => {
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-2">Empreinte Carbone</h3>
                 <p className="text-gray-600">
-                  Nous travaillons activement à réduire notre empreinte carbone à travers l'optimisation de notre chaîne d'approvisionnement et l'utilisation d'énergies renouvelables.
+                  Nous travaillons activement à réduire notre empreinte carbone à travers l&lsquo;optimisation de notre chaîne d&lsquo;approvisionnement et l&lsquo;utilisation d&lsquo;énergies renouvelables.
                 </p>
               </div>
             </div>
@@ -109,13 +109,13 @@ const DeveloppementDurablePage = () => {
                     <svg className="w-6 h-6 text-green-600 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
-                    <p className="text-gray-600"><span className="font-bold">Neutralité carbone</span> - Atteindre la neutralité carbone dans toutes nos opérations et notre chaîne d'approvisionnement.</p>
+                    <p className="text-gray-600"><span className="font-bold">Neutralité carbone</span> - Atteindre la neutralité carbone dans toutes nos opérations et notre chaîne d&lsquo;approvisionnement.</p>
                   </li>
                   <li className="flex items-start">
                     <svg className="w-6 h-6 text-green-600 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
-                    <p className="text-gray-600"><span className="font-bold">Zéro déchet</span> - Éliminer tous les déchets de notre processus de production et adopter un modèle d'économie circulaire.</p>
+                    <p className="text-gray-600"><span className="font-bold">Zéro déchet</span> - Éliminer tous les déchets de notre processus de production et adopter un modèle d&lsquo;économie circulaire.</p>
                   </li>
                   <li className="flex items-start">
                     <svg className="w-6 h-6 text-green-600 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -1,8 +1,10 @@
 "use client";
-import React, { useRef } from 'react';
+import React from 'react';
+import { useRef } from 'react';
 import { Button, Group, Card } from '@mantine/core';
-import { Dropzone } from '@mantine/dropzone'; // Removed MIME_TYPES import since it's unused
+import { Dropzone } from '@mantine/dropzone';
 import { IconBrandTelegram, IconPhoto, IconUpload } from '@tabler/icons-react';
+import { MultiSelect } from '@mantine/core';
 
 // Liste des pays
 const countries = [
@@ -61,7 +63,7 @@ function FormProfilVendeur() {
                                                 <option value="+33">+33 (France)</option>
                                                 <option value="+1">+1 (USA)</option>
                                                 <option value="+44">+44 (Royaume-Uni)</option>
-                                                <option value="+225">+225 (Côte d'Ivoire)</option> {/* Correctly escaped quote */}
+                                                <option value="+225">+225 (Côte d&lsquo;Ivoire)</option>
                                                 <option value="+237">+237 (Cameroun)</option>
                                                 <option value="+221">+221 (Sénégal)</option>
                                                 <option value="+212">+212 (Maroc)</option>
@@ -109,15 +111,17 @@ function FormProfilVendeur() {
                             <Card.Section className="p-4">
                                 <div className="space-y-6">
                                     <div>
-                                        <label htmlFor="pays" className="block text-sm font-medium text-gray-700 mb-1">Pays</label>
-                                        <select id="pays" className="mt-1 block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                                            <option value="">Sélectionner un pays</option>
-                                            {countries.map((country) => (
-                                                <option key={country.code} value={country.code}>
-                                                    {country.name}
-                                                </option>
-                                            ))}
-                                        </select>
+                                        <label htmlFor="pays" className="block text-sm font-medium text-gray-700 mb-1">Pays cibles</label>
+                                        <MultiSelect
+                                            data={countries.map(c => ({ value: c.code, label: c.name }))}
+                                            placeholder="Sélectionner les pays"
+                                            searchable
+                                            className="mt-1"
+                                            styles={() => ({
+                                                input: { padding: '1rem', borderRadius: '0.5rem' },
+                                                dropdown: { borderRadius: '0.5rem' },
+                                            })}
+                                        />
                                     </div>
                                     <div>
                                         <label htmlFor="adresse" className="block text-sm font-medium text-gray-700 mb-1">Adresse</label>
@@ -154,6 +158,21 @@ function FormProfilVendeur() {
                         Modifier mon profil
                         <IconBrandTelegram size={24} className="ml-2" />
                     </button>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Méthodes de paiement</label>
+                        <div className="space-y-2">
+                            <label className="flex items-center space-x-2 p-3 border rounded-lg hover:bg-gray-50">
+                                <input type="checkbox" className="form-checkbox" />
+                                <span>Paiement en ligne</span>
+                            </label>
+                            <label className="flex items-center space-x-2 p-3 border rounded-lg hover:bg-gray-50">
+                                <input type="checkbox" className="form-checkbox" />
+                                <span>Paiement à la livraison</span>
+                            </label>
+                        </div>
+                    </div>
                 </div>
             </form>
         </div>

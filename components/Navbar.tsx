@@ -69,6 +69,7 @@ const Navbar = () => {
       <nav className="bg-white shadow-sm fixed w-full z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16 items-center">
+            {/* Mobile menu button */}
             <div className="flex items-center">
               <button
                 className="sm:hidden p-2"
@@ -99,7 +100,7 @@ const Navbar = () => {
                   onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
                 >
                   <User className="h-5 w-5 mr-2" /> {/* Icône utilisateur */}
-                  {isLoggedIn ? userName : 'Se connecter'}
+                  <span className="hidden sm:inline">{isLoggedIn ? userName : 'Se connecter'}</span>
                   {isUserMenuOpen ? (
                     <FaCaretUp className="ml-2 h-4 w-4" /> // Flèche vers le haut
                   ) : (
@@ -109,62 +110,69 @@ const Navbar = () => {
 
                 {/* Menu déroulant de l'utilisateur */}
                 {isUserMenuOpen && (
-                  <div className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 border border-gray-200">
-                    <div className="px-4 py-2 border-b border-gray-200">
-                      <Link 
-                        href={isLoggedIn ? "/compte" : "/connexion"} 
-                        className="block text-sm font-medium text-gray-900 hover:text-indigo-600" 
-                        onClick={() => {
-                          setIsUserMenuOpen(false);
-                          if (!isLoggedIn) {
-                            setRedirectUrl('/compte');
-                          }
-                        }}
-                      >
-                        Votre compte
-                      </Link>
-                    </div>
-                    {isLoggedIn ? (
-                      <button
-                        className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                        onClick={() => {
-                          localStorage.removeItem('usersInfos');
-                          setIsLoggedIn(false);
-                          setIsUserMenuOpen(false);
-                          router.push('/');
-                        }}
-                      >
-                        Se déconnecter
-                      </button>
-                    ) : (
-                      <Link
-                        href="/connexion"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                        onClick={() => setIsUserMenuOpen(false)}
-                      >
-                        Se connecter
-                      </Link>
-                    )}
-                    <Link
-                      href={isLoggedIn ? "/commandes" : "/connexion"}
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  <div className="absolute left-0 mt-2 bg-white rounded-md shadow-lg py-1 z-50 border border-gray-200 overflow-hidden">
+                  {isLoggedIn ? (
+                    <button
+                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                       onClick={() => {
-                        handleOrdersClick();
+                        localStorage.removeItem('usersInfos');
+                        setIsLoggedIn(false);
                         setIsUserMenuOpen(false);
+                        router.push('/');
                       }}
                     >
-                      <div className="flex items-center">
-                        <Package className="h-4 w-4 mr-2" />
-                        Vos commandes
-                      </div>
+                      Se déconnecter
+                    </button>
+                  ) : (
+                    <Link
+                      href="/connexion"
+                      className="block p-2 mt-2 bg-gray-700 text-white rounded-lg hover:bg-gray-900 transition-colors duration-300 max-w-max ml-6"
+                      onClick={() => setIsUserMenuOpen(false)}
+                    >
+                      Se connecter
                     </Link>
-                  </div>
+                  )}
+                
+                  {/* Barre de séparation après le lien Se connecter */}
+                  <div className="px-4 py-1 border-b border-gray-200 mt-2"></div>
+                
+                  <Link 
+                    href={isLoggedIn ? "/compte" : "/connexion"} 
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" 
+                    onClick={() => {
+                      setIsUserMenuOpen(false);
+                      if (!isLoggedIn) {
+                        setRedirectUrl('/compte');
+                      }
+                    }}
+                  >
+                    <div className="flex items-center">
+                      <User className="h-4 w-4 mr-2" />
+                      Compte
+                    </div>
+                  </Link>
+                
+                  <Link
+                    href={isLoggedIn ? "/commandes" : "/connexion"}
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    onClick={() => {
+                      handleOrdersClick();
+                      setIsUserMenuOpen(false);
+                    }}
+                  >
+                    <div className="flex items-center">
+                      <Package className="h-4 w-4 mr-2" />
+                      Vos commandes
+                    </div>
+                  </Link>
+                </div>
+                
                 )}
               </div>
               <button className="p-2 relative">
                 <Link href="/shopp" className="flex items-center space-x-1">
                   <ShoppingBag className="h-5 w-5" />
-                  <span>Panier</span>
+                  <span className="hidden sm:inline">Panier</span>
                 </Link>
                 {uniqueItemsCount > 0 && (
                   <span className="absolute -top-1 -right-1 h-4 w-4 bg-black text-white rounded-full text-xs flex items-center justify-center">
@@ -181,7 +189,7 @@ const Navbar = () => {
           <div className="px-2 pt-2 pb-3 space-y-1">
             <Link href="/femmes" className="block px-3 py-2 text-gray-700 hover:text-gray-900">Femmes</Link>
             <Link href="/hommes" className="block px-3 py-2 text-gray-700 hover:text-gray-900">Hommes</Link>
-            <Link href="/nouveau" className="block px-3 py-2 text-gray-700 hover:text-gray-900">Nouveau</Link>
+            <Link href="/enfants" className="block px-3 py-2 text-gray-700 hover:text-gray-900">Enfants</Link>
             <Link href="/collections" className="block px-3 py-2 text-gray-700 hover:text-gray-900">Collections</Link>
           </div>
         </div>

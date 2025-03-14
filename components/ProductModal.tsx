@@ -16,15 +16,7 @@ type Product = {
 };
 
 type ProductModalProps = {
-  product: {
-    id: string | number;
-    name: string;
-    price: string;
-    image: string;
-    description?: string;
-    sizes?: string[];
-    colors?: string[];
-  };
+  product: Product;
   onClose: () => void;
 };
 
@@ -45,7 +37,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-hidden relative">
+      <div className="bg-white rounded-lg max-w-[95%] md:max-w-4xl w-full max-h-[95vh] md:max-h-[90vh] overflow-y-auto relative">
         <button
           onClick={onClose}
           className="absolute right-4 top-4 p-2 hover:bg-gray-100 rounded-full"
@@ -60,7 +52,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) => {
               alt={product.name}
               width={500}
               height={400}
-              className="w-full h-[500px] object-cover"
+              className="w-full h-[40vh] md:h-[500px] object-cover"
             />
             <button
               onClick={() => toggleFavorite(product.id)}
@@ -74,7 +66,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) => {
             </button>
           </div>
           
-          <div className="p-6 flex flex-col">
+          <div className="p-4 md:p-6 flex flex-col">
             <h2 className="text-2xl font-bold mb-2">{product.name}</h2>
             <p className="text-xl font-semibold mb-4">{product.price}</p>
             <p className="text-gray-600 mb-6">
@@ -84,7 +76,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) => {
             {/* Size Selector */}
             <div className="mb-6">
               <h3 className="text-sm font-medium text-gray-900 mb-4">Sélectionnez une taille</h3>
-              <div className="grid grid-cols-4 gap-2">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
                 {availableSizes.map((size) => (
                   <button
                     key={size}
@@ -105,7 +97,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) => {
             {/* Color Selector */}
             <div className="mb-6">
               <h3 className="text-sm font-medium text-gray-900 mb-4">Sélectionnez une couleur</h3>
-              <div className="grid grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4">
                 {availableColors.map((color) => {
                   const colorMap: { [key: string]: string } = {
                     'Noir': '#000000',
@@ -166,7 +158,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) => {
                   setTimeout(() => onClose(), 300);
                 }
               }}
-              className={`flex items-center justify-center space-x-2 py-3 px-6 rounded-lg transition-colors ${(selectedSize && selectedColor)
+              className={`flex items-center justify-center space-x-2 py-2 md:py-3 px-4 md:px-6 rounded-lg transition-colors text-sm md:text-base ${(selectedSize && selectedColor)
                 ? 'bg-black text-white hover:bg-gray-800'
                 : 'bg-gray-300 text-gray-500 cursor-not-allowed'
               }`}

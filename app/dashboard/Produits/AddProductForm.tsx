@@ -1,5 +1,5 @@
 "use client"
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Card, Text, Button, Container, Image as MantineImage } from '@mantine/core'
 import { IconBrandTelegram, IconCheck, IconX } from '@tabler/icons-react'
 import "../NavbarSimpleColored.module.css";
@@ -17,9 +17,10 @@ function AddProductForm() {
     const [descriptionProduit, setDescriptionProduit] = useState("")
     const [prix, setPrix] = useState("")
     const [typeVente, setTypeVente] = useState("")
-    const [devise, ] = useState("FCFA")
+    const [devise] = useState("FCFA")
     const [qte, setQte] = useState("")
     const [date, setDate] = useState("")
+    const [] = useState("")
     const [category, setCategory] = useState("")
     const [collection, setCollection] = useState("")
     const [, setImageUrl] = useState("");
@@ -33,8 +34,8 @@ function AddProductForm() {
     const[files,setFiles]= useState("")
     
     const recupimage=(e:OutputCollectionState<OutputCollectionStatus, "maybe-has-group">)=>{
-        if(e.allEntries[0].uuid){
-            setFiles(e.allEntries[0]?.cdnUrl!)
+        if(e.allEntries[0].uuid && e.allEntries[0].cdnUrl){
+            setFiles(e.allEntries[0].cdnUrl!)
         }
     }
 
@@ -128,7 +129,7 @@ function AddProductForm() {
             {!user && (
                 <Card shadow="sm" padding="lg" radius="md" withBorder className="mb-8 bg-yellow-50">
                     <Text color="orange" className="text-center font-medium">
-                        Vous devez être connecté pour ajouter un produit. Veuillez vous connecter d'abord.
+                        Vous devez être connecté pour ajouter un produit. Veuillez vous connecter d&lsquo;abord.
                     </Text>
                 </Card>
             )}

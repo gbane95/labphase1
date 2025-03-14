@@ -5,7 +5,7 @@ import Footer from '@/components/Footer';
 import Image from 'next/image';
 
 const CarrieresPage = () => {
-  // Exemples d'offres d'emploi
+  // Sample job listings
   const jobListings = [
     {
       id: 1,
@@ -55,12 +55,10 @@ const CarrieresPage = () => {
           />
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-center text-white px-4">
-            // eslint-disable-next-line react/no-unescaped-entities
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Rejoignez l'équipe LUXE</h1>
-            <p className="text-xl max-w-2xl mx-auto">
+              <h1 className="text-4xl md:text-5xl font-bold mb-4">Rejoignez l&lsquo;équipe LUXE</h1>
+              <p className="text-xl max-w-2xl mx-auto">
                 Découvrez les opportunités de carrière au sein de notre maison de luxe
               </p>
-
             </div>
           </div>
         </div>
@@ -79,10 +77,8 @@ const CarrieresPage = () => {
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-2">Innovation</h3>
                 <p className="text-gray-600">
-  Nous encourageons la créativité et l'innovation dans tous les aspects de notre entreprise.
-</p>
-
-
+                  Nous encourageons la créativité et l&lsquo;innovation dans tous les aspects de notre entreprise.
+                </p>
               </div>
               <div className="bg-gray-50 p-6 rounded-lg shadow-sm">
                 <div className="w-12 h-12 bg-gray-900 rounded-full flex items-center justify-center mb-4">
@@ -109,7 +105,7 @@ const CarrieresPage = () => {
             </div>
           </div>
 
-          {/* Postes vacants actuels */}
+          {/* Current Openings */}
           <div>
             <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Postes Ouverts</h2>
             <div className="space-y-6">
@@ -132,7 +128,7 @@ const CarrieresPage = () => {
             </div>
           </div>
 
-          {/* Appel à l'action */}
+          {/* Call to Action */}
           <div className="mt-16 bg-gray-100 p-8 rounded-lg text-center">
             <h3 className="text-2xl font-bold text-gray-900 mb-4">Vous ne trouvez pas le poste idéal ?</h3>
             <p className="text-gray-600 mb-6 max-w-2xl mx-auto">

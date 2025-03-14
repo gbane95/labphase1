@@ -8,6 +8,7 @@ import Footer from '@/components/Footer';
 import { useCart } from '@/context/CartContext';
 import { useFavorites } from '@/context/FavoritesContext';
 import { Heart, ShoppingBag, Minus, Plus } from 'lucide-react';
+import { ParamsID } from '@/types/task';
 
 interface Product {
   id: string;
@@ -27,9 +28,9 @@ interface Product {
   couleurs: string[];
 }
 
-export default function ProductDetail({ params }: { params: { id: string } }) {
+export default function ProductDetail({ params }: ParamsID) {
   const router = useRouter();
-  const { addToCart } = useCart();
+  const { addToCart} = useCart();
   const { toggleFavorite, isFavorite } = useFavorites();
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
@@ -37,10 +38,13 @@ export default function ProductDetail({ params }: { params: { id: string } }) {
   const [quantity, setQuantity] = useState(1);
   const [selectedSize, setSelectedSize] = useState<string>('');
 
+
+
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`/api/products/${params.id}`);
+        const {id} = await params;
+        const response = await fetch(`/api/products/${id}`);
         if (!response.ok) {
           throw new Error('Produit non trouvé');
         }
@@ -54,7 +58,7 @@ export default function ProductDetail({ params }: { params: { id: string } }) {
     };
 
     fetchProduct();
-  }, [params.id]);
+  }, []);
 
   if (loading) {
     return (
@@ -96,87 +100,89 @@ export default function ProductDetail({ params }: { params: { id: string } }) {
   return (
     <>
       <Navbar />
-      <div className="container mx-auto px-4 py-8 mt-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="relative">
-            <Image
-              src={product.imageUrl}
-              alt={product.nomProduit}
-              width={600}
-              height={600}
-              className="w-full h-auto object-cover rounded-lg"
-            />
-            <button
-              onClick={() => toggleFavorite(product.id)}
-              className={`absolute top-4 right-4 p-2 rounded-full ${isFavorite(product.id) ? 'bg-red-500 text-white' : 'bg-white text-gray-900'}`}
-            >
-              <Heart className="h-6 w-6" fill={isFavorite(product.id) ? "currentColor" : "none"} />
-            </button>
-          </div>
+      <div className="min-h-screen flex flex-col">
+        <div className="flex-grow pt-16 container mx-auto px-4 py-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="relative">
+              <Image
+                src={product.imageUrl}
+                alt={product.nomProduit}
+                width={600}
+                height={600}
+                className="w-full h-auto object-cover rounded-lg"
+              />
+              <button
+                onClick={() => toggleFavorite(product.id)}
+                className={`absolute top-4 right-4 p-2 rounded-full ${isFavorite(product.id) ? 'bg-red-500 text-white' : 'bg-white text-gray-900'}`}
+              >
+                <Heart className="h-6 w-6" fill={isFavorite(product.id) ? "currentColor" : "none"} />
+              </button>
+            </div>
 
-          <div className="space-y-6">
-            <h1 className="text-3xl font-bold">{product.nomProduit}</h1>
-            <p className="text-2xl font-semibold">{product.prix} {product.devise}</p>
-            <p className="text-gray-600">{product.descriptionProduit}</p>
+            <div className="space-y-6">
+              <h1 className="text-3xl font-bold">{product.nomProduit}</h1>
+              <p className="text-2xl font-semibold">{product.prix} {product.devise}</p>
+              <p className="text-gray-600">{product.descriptionProduit}</p>
 
-            <div>
-              <h3 className="text-lg font-medium mb-2">Taille</h3>
-              <div className="grid grid-cols-4 gap-2">
-                {product.tailles.map((size) => (
-                  <button
-                    key={size}
-                    onClick={() => setSelectedSize(size)}
-                    className={`py-2 px-4 text-sm font-medium rounded-md border ${selectedSize === size ? 'border-black bg-black text-white' : 'border-gray-300 text-gray-900 hover:bg-gray-50'}`}
-                  >
-                    {size}
-                  </button>
-                ))}
+              <div>
+                <h3 className="text-lg font-medium mb-2">Taille</h3>
+                <div className="grid grid-cols-4 gap-2">
+                  {product.tailles.map((size) => (
+                    <button
+                      key={size}
+                      onClick={() => setSelectedSize(size)}
+                      className={`py-2 px-4 text-sm font-medium rounded-md border ${selectedSize === size ? 'border-black bg-black text-white' : 'border-gray-300 text-gray-900 hover:bg-gray-50'}`}
+                    >
+                      {size}
+                    </button>
+                  ))}
+                </div>
               </div>
-            </div>
 
-            <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-4">
+                <button
+                  onClick={() => setQuantity(prev => Math.max(1, prev - 1))}
+                  className="p-2 border rounded-full hover:bg-gray-100"
+                  disabled={quantity === 1}
+                >
+                  <Minus className="h-4 w-4" />
+                </button>
+                <span className="text-xl font-medium">{quantity}</span>
+                <button
+                  onClick={() => setQuantity(prev => prev + 1)}
+                  className="p-2 border rounded-full hover:bg-gray-100"
+                  disabled={quantity >= product.qte}
+                >
+                  <Plus className="h-4 w-4" />
+                </button>
+              </div>
+
               <button
-                onClick={() => setQuantity(prev => Math.max(1, prev - 1))}
-                className="p-2 border rounded-full hover:bg-gray-100"
-                disabled={quantity === 1}
+                onClick={handleAddToCart}
+                className="w-full bg-black text-white py-3 px-6 rounded-md hover:bg-gray-900 flex items-center justify-center space-x-2"
+                disabled={product.qte === 0}
               >
-                <Minus className="h-4 w-4" />
+                <ShoppingBag className="h-5 w-5" />
+                <span>{product.qte === 0 ? 'Rupture de stock' : 'Ajouter au panier'}</span>
               </button>
-              <span className="text-xl font-medium">{quantity}</span>
-              <button
-                onClick={() => setQuantity(prev => prev + 1)}
-                className="p-2 border rounded-full hover:bg-gray-100"
-                disabled={quantity >= product.qte}
-              >
-                <Plus className="h-4 w-4" />
-              </button>
-            </div>
 
-            <button
-              onClick={handleAddToCart}
-              className="w-full bg-black text-white py-3 px-6 rounded-md hover:bg-gray-900 flex items-center justify-center space-x-2"
-              disabled={product.qte === 0}
-            >
-              <ShoppingBag className="h-5 w-5" />
-              <span>{product.qte === 0 ? 'Rupture de stock' : 'Ajouter au panier'}</span>
-            </button>
-
-            <div className="border-t pt-6 mt-6">
-              <h3 className="text-lg font-medium mb-2">Détails du produit</h3>
-              <dl className="space-y-2">
-                <div className="flex">
-                  <dt className="w-1/3 text-gray-500">Catégorie</dt>
-                  <dd className="w-2/3">{product.category}</dd>
-                </div>
-                <div className="flex">
-                  <dt className="w-1/3 text-gray-500">Collection</dt>
-                  <dd className="w-2/3">{product.collection || 'Non spécifiée'}</dd>
-                </div>
-                <div className="flex">
-                  <dt className="w-1/3 text-gray-500">Code produit</dt>
-                  <dd className="w-2/3">{product.codeProduit}</dd>
-                </div>
-              </dl>
+              <div className="border-t pt-6 mt-6">
+                <h3 className="text-lg font-medium mb-2">Détails du produit</h3>
+                <dl className="space-y-2">
+                  <div className="flex">
+                    <dt className="w-1/3 text-gray-500">Catégorie</dt>
+                    <dd className="w-2/3">{product.category}</dd>
+                  </div>
+                  <div className="flex">
+                    <dt className="w-1/3 text-gray-500">Collection</dt>
+                    <dd className="w-2/3">{product.collection || 'Non spécifiée'}</dd>
+                  </div>
+                  <div className="flex">
+                    <dt className="w-1/3 text-gray-500">Code produit</dt>
+                    <dd className="w-2/3">{product.codeProduit}</dd>
+                  </div>
+                </dl>
+              </div>
             </div>
           </div>
         </div>

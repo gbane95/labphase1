@@ -6,16 +6,16 @@ import ProductGrid from '@/components/ProductGrid';
 
 const Enfants = () => {
   return (
-    <>
+    <div className="min-h-screen flex flex-col">
       <Navbar />
-      <div className="pt-16">
+      <div className="flex-grow pt-16">
         <ProductGrid 
           category="enfants" 
           title="Collection Enfants" 
         />
       </div>
       <Footer />
-    </>
+    </div>
   );
 };
 

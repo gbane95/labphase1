@@ -4,15 +4,15 @@ import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
   try {
-    //Obtenir les paramètres d'URL
+    // Get URL parameters
     const { searchParams } = new URL(request.url);
     const category = searchParams.get('category');
     const collectionName = searchParams.get('collection');
 
-    // Requête de base
+    // Base query
     let produitsQuery = query(collection(database, "produit"));
     
-    // Ajouter des filtres si des paramètres sont fournis
+    // Add filters if parameters are provided
     const filters = [];
     if (category) {
       filters.push(where("category", "==", category));
@@ -21,7 +21,7 @@ export async function GET(request: Request) {
       filters.push(where("collection", "==", collectionName));
     }
 
-    // Appliquer des filtres, le cas échéant
+    // Apply filters if any
     if (filters.length > 0) {
       produitsQuery = query(collection(database, "produit"), ...filters);
     }
@@ -29,7 +29,7 @@ export async function GET(request: Request) {
     const snap = await getDocs(produitsQuery);
 
     if (!snap.empty) {
-     // Mapping des documents récupérés pour créer un tableau de produits
+      // Mapping des documents récupérés pour créer un tableau de produits
       const products = snap.docs.map((doc) => {
         const docData = doc.data();
         return {

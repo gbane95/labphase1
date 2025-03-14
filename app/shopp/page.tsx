@@ -1,7 +1,7 @@
 'use client';
 
 import '../css/Styles.css';
-import { useState } from 'react';
+import { useState} from 'react';
 import { ChevronLeft, Plus, Minus, Trash2 } from 'lucide-react';
 import { useRouter } from "next/navigation";
 import Link from 'next/link';
@@ -14,71 +14,84 @@ import { useCart } from '@/context/CartContext';
 export default function Shopp() {
   const router = useRouter();
   const { cart, updateQuantity: updateCartQuantity, removeFromCart } = useCart();
-  const [message, setMessage] = useState(""); // Message pour la soumission
-  const [shippingCost] = useState(2); // Coût d'expédition en USD
-  const [promoCode, setPromoCode] = useState(''); // Promo code
+  const [message, setMessage] = useState('');
+  const [shippingCost] = useState(1200); // Fixed CFA value
+  const [promoCode, setPromoCode] = useState('');
 
   // Taux de conversion USD -> CFA
   const USD_TO_CFA = 600;
 
   const isCFA = (price: string | number) => {
-    return typeof price === 'string' && price.toUpperCase().includes('CFA');
+    return typeof price === 'string' && price.includes('FCFA');
+  };
+
+  const convertToCFA = (amount: number, originalPrice: string | number) => {
+    if (isCFA(originalPrice)) {
+      return amount;
+    }
+    return Math.round(amount * USD_TO_CFA);
   };
 
   const parsePrice = (price: string | number) => {
     if (typeof price === 'string') {
-      // Remove all non-numeric characters except decimal point
-      const numericPrice = price.replace(/[^0-9.]+/g, '');
+      // Remove all non-numeric characters except decimal points
+      const numericPrice = price.replace(/[^0-9.,]+/g, '').replace(',', '.');
       return parseFloat(numericPrice);
     }
-    return typeof price === 'number' ? price : 0;
-  };
-
-  const convertToCFA = (amount: number, originalPrice: string | number) => {
-    // If the original price is already in CFA, return the amount directly
-    if (isCFA(originalPrice)) {
-      return amount;
-    }
-    // Convert USD to CFA
-    return Math.round(amount * USD_TO_CFA);
+    return price;
   };
 
   const subtotal = cart.reduce((sum, item) => {
     const price = parsePrice(item.price);
-    return sum + (isCFA(item.price) ? price * item.quantity : convertToCFA(price * item.quantity, item.price));
+    return sum + (price * item.quantity);
   }, 0);
 
-  const total = subtotal + convertToCFA(shippingCost, '');
+  const total = subtotal + shippingCost;
 
-  // Cette fonction est maintenant définie plus haut
-
+  // Vérification de l'authentification avant la soumission
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setMessage(""); // Réinitialisation du message
 
-    const req = await fetch("/serveur/login", {
-      headers: { "Content-type": "application/json" },
-      method: "POST",
-      body: JSON.stringify({ promoCode })
-    });
+    
 
-    if (req.ok) {
-      console.log("Commande envoyée !");
-    } else {
-      console.error("Erreur lors de la soumission");
+    try {
+      setMessage(''); // Réinitialisation du message
+
+      // Si un code promo est fourni, nous essayons de le valider
+      if (promoCode) {
+        console.log('Tentative de validation du code promo:', promoCode);
+
+        const req = await fetch('/api/validate-promo', {
+          headers: { 'Content-Type': 'application/json' },
+          method: 'POST',
+          body: JSON.stringify({ promoCode })
+        });
+
+        if (!req.ok) throw new Error('Erreur réseau');
+
+        const res = await req.json();
+
+        if (res?.data) {
+          console.log('Code promo valide:', res.data);
+          // Stocker le nouveau token d'authentification s'il est reçu
+          localStorage.setItem('authToken', res.data.authToken);
+          setMessage('Code promo appliqué avec succès!');
+        } else {
+          console.log('Code promo non valide');
+          throw new Error(res.message || 'Erreur de traitement');
+        }
+      }
+    } catch (error) {
+      console.error('Erreur:', error);
+      setMessage(error instanceof Error ? error.message : 'Une erreur est survenue');
     }
 
-    const res = await req.json();
-    // Vérification des champs requis
-    if (res && res.data) {
-      console.log(res.data);
-      setMessage("Commande envoyée avec succès!");
-      router.push("/dashboard"); // Redirection vers le dashboard
-      return;
-    } else {
-      setMessage(res);
-    }
+    // Finalement, même si le code promo échoue ou est absent, on redirige vers le checkout
+    console.log('Redirection vers /checkout');
+    router.push('/checkout');
   };
+
+  
 
   return (
     <>
@@ -179,7 +192,7 @@ export default function Shopp() {
                   
                   <div className="flex justify-between">
                     <span className="text-gray-600">Frais de livraison</span>
-                    <span className="font-medium">{convertToCFA(shippingCost, '').toLocaleString()} CFA</span>
+                    <span className="font-medium">{shippingCost.toLocaleString()} CFA</span>
                   </div>
 
                   <div className="pt-4 border-t">

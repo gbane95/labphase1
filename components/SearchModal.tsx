@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import React, { useState, useEffect } from 'react';
 import { X, Search, ShoppingBag, Minus, Plus } from 'lucide-react';
 import Image from 'next/image';
@@ -93,8 +93,6 @@ const SearchModal: React.FC<SearchModalProps> = ({ onClose }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  // Supprimer l'utilisation du router si non utilisée
-  // const router = useRouter();
   const { addToCart } = useCart();
 
   // Effectuer la recherche lorsque la requête change
@@ -135,7 +133,10 @@ const SearchModal: React.FC<SearchModalProps> = ({ onClose }) => {
 
   // Gérer le clic sur un produit
   const handleProductClick = (product: Product) => {
+    // Afficher le modal du produit au lieu de rediriger
     setSelectedProduct(product);
+    // Ne pas fermer le modal de recherche tout de suite
+    // onClose() sera appelé après la fermeture du modal produit
   };
 
   // Ajouter au panier
@@ -178,8 +179,9 @@ const SearchModal: React.FC<SearchModalProps> = ({ onClose }) => {
               </p>
             ) : searchResults.length === 0 ? (
               <p className="text-gray-500 text-center">
-                Aucun produit trouvé pour &quot;{searchQuery}&quot;
-              </p>
+  Aucun produit trouvé pour &quot;{searchQuery}&quot;
+</p>
+
             ) : (
               <div className="space-y-4">
                 <p className="text-sm text-gray-500">{searchResults.length} produit(s) trouvé(s)</p>
@@ -229,6 +231,7 @@ const SearchModal: React.FC<SearchModalProps> = ({ onClose }) => {
             <button
               onClick={() => {
                 setSelectedProduct(null);
+                // Fermer également le modal de recherche
                 onClose();
               }}
               className="absolute right-4 top-4 p-2 hover:bg-gray-100 rounded-full"
@@ -291,4 +294,4 @@ const SearchModal: React.FC<SearchModalProps> = ({ onClose }) => {
   );
 };
 
-export default SearchModal;
+export default SearchModal

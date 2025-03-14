@@ -30,10 +30,12 @@ export default function DashboardLayout({
         if (userData.accountType !== 'vendeur') {
           // Rediriger vers la page d'accueil si l'utilisateur n'est pas un vendeur
           router.push('/');
+        } else if (userData.accountType === 'vendeur') {
+          router.push('/dashboard');
         }
       } catch (error) {
         console.error('Erreur lors de la vérification des informations utilisateur:', error);
-        router.push('/dashboard');
+        router.push('/connexion');
       }
     }
   }, [router]);

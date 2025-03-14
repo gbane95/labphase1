@@ -1,7 +1,7 @@
 "use client"
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
-type CartItem = {
+export type CartItem = {
   id: string | number;
   name: string;
   price: string | number;
@@ -40,7 +40,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   // Fonction d'aide pour normaliser le prix
   const normalizePrice = (price: string | number): number => {
     if (typeof price === 'number') return price;
-    return parseFloat(price.replace(/[^0-9.-]+/g, ''));
+    return parseFloat(price.replace(/[^0-9.,]+/g, '').replace(',', '.'));
   };
 
   const addToCart = (product: CartItem) => {

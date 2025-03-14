@@ -157,7 +157,7 @@ export default function Parametre() {
                 <Moon className="h-6 w-6 text-gray-500" />
                 <div>
                   <h2 className="text-lg font-medium text-gray-900">Thème</h2>
-                  <p className="text-sm text-gray-500">Choisir le mode d'affichage</p>
+                  <p className="text-sm text-gray-500">Choisir le mode d&ldquo;affichage</p>
                 </div>
               </div>
               <label className="relative inline-flex items-center cursor-pointer">
@@ -199,7 +199,7 @@ export default function Parametre() {
               className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
             >
               <Save className="h-4 w-4 mr-2" />
-              Sauvegarder
+              Enregistrer les modifications
             </button>
           </div>
         </div>
@@ -207,3 +207,4 @@ export default function Parametre() {
     </div>
   );
 }
+

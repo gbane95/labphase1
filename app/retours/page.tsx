@@ -22,7 +22,7 @@ const RetoursPage = () => {
             <div className="text-center text-white px-4">
               <h1 className="text-4xl md:text-5xl font-bold mb-4">Politique de Retours</h1>
               <p className="text-xl max-w-2xl mx-auto">
-                Simple, rapide et sans tracas – Notre engagement pour votre satisfaction
+                Simple, rapide et sans tracas - Notre engagement pour votre satisfaction
               </p>
             </div>
           </div>
@@ -67,7 +67,9 @@ const RetoursPage = () => {
                 </div>
                 <div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Initiez votre retour</h3>
-                  <p className="text-gray-600">Connectez-vous à votre compte et sélectionnez les articles que vous souhaitez retourner dans la section "Mes commandes".</p>
+                  <p className="text-gray-600">
+  Connectez-vous à votre compte et sélectionnez les articles que vous souhaitez retourner dans la section &quot;Mes commandes&quot;.
+</p>
                 </div>
               </div>
               <div className="flex items-start">
@@ -76,7 +78,7 @@ const RetoursPage = () => {
                 </div>
                 <div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Emballez vos articles</h3>
-                  <p className="text-gray-600">Placez les articles dans leur emballage d'origine avec toutes les étiquettes attachées.</p>
+                  <p className="text-gray-600">Placez les articles dans leur emballage d&lsquo;origine avec toutes les étiquettes attachées.</p>
                 </div>
               </div>
               <div className="flex items-start">
@@ -85,7 +87,7 @@ const RetoursPage = () => {
                 </div>
                 <div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Expédiez le colis</h3>
-                  <p className="text-gray-600">Utilisez l'étiquette de retour prépayée et déposez votre colis dans un point relais.</p>
+                  <p className="text-gray-600">Utilisez l&lsquo;étiquette de retour prépayée et déposez votre colis dans un point relais.</p>
                 </div>
               </div>
               <div className="flex items-start">
@@ -107,7 +109,7 @@ const RetoursPage = () => {
               <ul className="space-y-4">
                 <li className="flex items-start">
                   <CheckCircle className="w-6 h-6 text-green-600 mr-2 flex-shrink-0" />
-                  <p className="text-gray-600">Les articles doivent être retournés dans leur état d'origine, non portés et avec toutes les étiquettes attachées.</p>
+                  <p className="text-gray-600">Les articles doivent être retournés dans leur état d&lsquo;origine, non portés et avec toutes les étiquettes attachées.</p>
                 </li>
                 <li className="flex items-start">
                   <CheckCircle className="w-6 h-6 text-green-600 mr-2 flex-shrink-0" />
@@ -119,7 +121,7 @@ const RetoursPage = () => {
                 </li>
                 <li className="flex items-start">
                   <CheckCircle className="w-6 h-6 text-green-600 mr-2 flex-shrink-0" />
-                  <p className="text-gray-600">Pour des raisons d'hygiène, les sous-vêtements et maillots de bain ne peuvent pas être retournés.</p>
+                  <p className="text-gray-600">Pour des raisons d&lsquo;hygiène, les sous-vêtements et maillots de bain ne peuvent pas être retournés.</p>
                 </li>
               </ul>
             </div>
@@ -127,7 +129,7 @@ const RetoursPage = () => {
 
           {/* Contact Section */}
           <div className="text-center">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Besoin d'aide ?</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Besoin d&lsquo;aide ?</h2>
             <p className="text-gray-600 mb-6">Notre service client est là pour vous aider avec vos retours.</p>
             <a href="/contact" className="bg-gray-900 text-white px-6 py-3 rounded hover:bg-gray-800 transition-colors inline-block">
               Contactez-nous

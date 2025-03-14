@@ -4,7 +4,6 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Mail, Phone, MapPin, Clock } from 'lucide-react';
 import Image from 'next/image';
-import Link from 'next/link';
 
 const ContactPage = () => {
   // Form state
@@ -166,9 +165,9 @@ const ContactPage = () => {
                     onChange={handleChange}
                     required
                     rows={5}
-                    placeholder="Votre message..."
-                    className="w-full h-32 px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    aria-label="Votre message"
+                  ></textarea>
                 </div>
                 
                 <button
@@ -188,7 +187,7 @@ const ContactPage = () => {
                 <div className="flex items-start mb-4">
                   <Clock className="w-5 h-5 text-gray-900 mr-2 flex-shrink-0 mt-0.5" />
                   <div>
-                    <h3 className="text-lg font-medium text-gray-900 mb-2">Horaires d'ouverture</h3>
+                    <h3 className="text-lg font-medium text-gray-900 mb-2">Horaires d&lsquo;ouverture</h3>
                     <ul className="space-y-1 text-gray-600">
                       <li className="flex justify-between">
                         <span>Lundi - Vendredi:</span>
@@ -233,26 +232,19 @@ const ContactPage = () => {
               </div>
               <div className="border border-gray-200 rounded-lg p-4">
                 <h3 className="text-lg font-medium text-gray-900 mb-2">Comment puis-je suivre ma commande ?</h3>
-                <p className="text-gray-600">Vous recevrez un email avec un numéro de suivi dès que votre commande sera expédiée. Vous pourrez suivre votre colis en temps réel via notre page "Suivi de commande".</p>
+                <p className="text-gray-600">
+  Vous recevrez un email avec un numéro de suivi dès que votre commande sera expédiée. Vous pourrez suivre votre colis en temps réel via notre page &quot;Suivi de commande&quot;.
+</p>
+
               </div>
               <div className="border border-gray-200 rounded-lg p-4">
-                <h3 className="text-lg font-medium text-gray-900 mb-2">Puis-je modifier ma commande après l'avoir passée ?</h3>
-                <p className="text-gray-600">Si vous souhaitez apporter des modifications à votre commande, veuillez nous contacter dans les 24 heures suivant votre achat. Nous ferons de notre mieux pour répondre à votre demande.</p>
+                <h3 className="text-lg font-medium text-gray-900 mb-2">Quelle est votre politique de retour ?</h3>
+                <p className="text-gray-600">Vous disposez de 30 jours à compter de la réception de votre commande pour effectuer un retour. Les articles doivent être dans leur état d&ldquo;origine, non portés et avec toutes les étiquettes.</p>
               </div>
             </div>
-          </div>
-          
-          <div className="text-center mt-8">
-            <p className="text-sm text-gray-500 mt-4">
-              En soumettant ce formulaire, vous acceptez notre 
-              <Link href="/confidentialite" className="text-blue-600 hover:underline">
-                politique de confidentialité
-              </Link> 
-              et nos 
-              <Link href="/mentions-legales" className="text-blue-600 hover:underline">
-                conditions générales
-              </Link>.
-            </p>
+            <div className="text-center mt-8">
+              <a href="/faq" className="text-blue-600 hover:underline">Voir toutes les questions fréquentes</a>
+            </div>
           </div>
         </div>
       </div>

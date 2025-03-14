@@ -26,7 +26,7 @@ export default function Login() {
       try {
         const req = await fetch("/serveur/login", {
           headers: { "Content-type": "application/json" },
-          method: "POST",
+          method: "Post",
           body: JSON.stringify({ email, password })
         });
 
@@ -49,17 +49,14 @@ export default function Login() {
           console.log(res);
           setMessage("Utilisateur non trouvé, veuillez vous inscrire.");
         }
-      } catch (error: unknown) {
-        if (error instanceof Error) {
-          console.error("Erreur lors de la connexion", error.message);
-        } else {
-          console.error("Erreur lors de la connexion");
-        }
+      } catch (error) {
+        if(error instanceof Error)
+        console.log("Erreur lors de la connexion");
         setMessage("Erreur lors de la connexion. Vérifiez vos identifiants.");
       } finally {
         setLoading(false); // Désactiver le chargement
       }
-    }, 2000); // Simule un délai de 2 secondes
+    }, 2000); // Simule un délai de 2 secondes avant d'envoyer la requête
   };
 
   return (
@@ -125,7 +122,7 @@ export default function Login() {
         </button>
 
         <div className="text-center text-sm">
-          <p>Pas encore de compte ? <Link href="/inscription" className="text-blue-600 hover:underline">S'inscrire</Link></p>       
+          <p>Pas encore de compte ? <Link href="/inscription" className="text-blue-600 hover:underline">S&lsquo;inscrire</Link></p>       
         </div>
 
         {message && (

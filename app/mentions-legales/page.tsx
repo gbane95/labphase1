@@ -16,7 +16,7 @@ const MentionsLegalesPage = () => {
               <h2 className="text-2xl font-bold text-gray-900 mb-4">Informations légales</h2>
               <div className="prose prose-lg text-gray-600">
                 <p>
-                  LUXE est une société par actions simplifiée au capital de 1 000 000 Fcfa,
+                  LUXE est une société par actions simplifiée au capital de 100 000 euros,
                   immatriculée au Registre du Commerce et des Sociétés de Paris sous le numéro 123 456 789.
                 </p>
                 <p className="mt-4">
@@ -50,7 +50,7 @@ const MentionsLegalesPage = () => {
               <h2 className="text-2xl font-bold text-gray-900 mb-4">Propriété intellectuelle</h2>
               <div className="prose prose-lg text-gray-600">
                 <p>
-                  L'ensemble des éléments figurant sur le site www.luxe.com (textes, logos, photos, vidéos) sont protégés
+                  L&lsquo;ensemble des éléments figurant sur le site www.luxe.com (textes, logos, photos, vidéos) sont protégés
                   par les lois françaises et internationales relatives à la propriété intellectuelle. Ces éléments restent
                   la propriété exclusive de LUXE.
                 </p>
@@ -66,11 +66,11 @@ const MentionsLegalesPage = () => {
               <div className="prose prose-lg text-gray-600">
                 <p>
                   Conformément à la loi Informatique et Libertés du 6 janvier 1978 modifiée et au Règlement Général sur
-                  la Protection des Données (RGPD), vous disposez d'un droit d'accès, de rectification, de suppression et
-                  d'opposition aux données personnelles vous concernant.
+                  la Protection des Données (RGPD), vous disposez d&lsquo;un droit d&lsquo;accès, de rectification, de suppression et
+                  d&lsquo;opposition aux données personnelles vous concernant.
                 </p>
                 <p className="mt-4">
-                  Pour exercer ces droits, vous pouvez nous contacter à l'adresse suivante : privacy@luxe.com
+                  Pour exercer ces droits, vous pouvez nous contacter à l&lsquo;adresse suivante : privacy@luxe.com
                 </p>
               </div>
             </section>
@@ -79,8 +79,8 @@ const MentionsLegalesPage = () => {
               <h2 className="text-2xl font-bold text-gray-900 mb-4">Cookies</h2>
               <div className="prose prose-lg text-gray-600">
                 <p>
-                  Le site www.luxe.com utilise des cookies pour améliorer l'expérience utilisateur. En naviguant sur
-                  notre site, vous acceptez l'utilisation de cookies conformément à notre politique de confidentialité.
+                  Le site www.luxe.com utilise des cookies pour améliorer l&lsquo;expérience utilisateur. En naviguant sur
+                  notre site, vous acceptez l&lsquo;utilisation de cookies conformément à notre politique de confidentialité.
                 </p>
               </div>
             </section>
@@ -116,5 +116,3 @@ const MentionsLegalesPage = () => {
 };
 
 export default MentionsLegalesPage;
-
-// Les données collectées sont conservées pendant la durée nécessaire à l&apos;exécution des services souscrits
